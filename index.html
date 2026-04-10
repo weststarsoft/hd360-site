@@ -36,7 +36,7 @@
       --safari-deep:  #5a7a2e;
       --safari-text:  #2d4a10;
 
-      /* 3º andar — Universo */
+      /* 3º andar — Galáxia */
       --space-light: #ddd5f0;
       --space-mid:   #8b6fbe;
       --space-deep:  #5c3d8f;
@@ -448,7 +448,7 @@
     .areas-track {
       display: flex;
       gap: 20px;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
     }
     .area-card {
       flex: 0 0 280px;
@@ -1323,16 +1323,17 @@
         </button>
         <button class="andar-tab" onclick="showAndar('space', this)">
           <span class="andar-tab-dot dot-space"></span>
-          🪐 3º Andar — Universo
+          🪐 3º Andar — Galáxia
         </button>
       </div>
 
       <!-- Painel: Fundo do Mar -->
       <div class="andar-panel andar-ocean active" id="panel-ocean">
         <div class="andar-content">
-          <div class="andar-photo-placeholder">
-            <span class="placeholder-emoji">🌊</span>
-            <span class="placeholder-label">[ Foto do 1º andar — Fundo do Mar ]</span>
+          <div class="andar-photo-placeholder" style="position:relative;overflow:hidden;">
+            <img src="assets/images/tema-fundo-do-mar.jpg" alt="Fundo do Mar" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;border-radius:var(--radius-lg);">
+            <span class="placeholder-emoji" style="position:relative;z-index:1;">🌊</span>
+            <span class="placeholder-label" style="position:relative;z-index:1;">1º Andar — Fundo do Mar</span>
           </div>
           <div class="andar-info">
             <div class="andar-subtitle">1º Andar · Fundo do Mar</div>
@@ -1351,9 +1352,10 @@
       <!-- Painel: Safari -->
       <div class="andar-panel andar-safari" id="panel-safari">
         <div class="andar-content">
-          <div class="andar-photo-placeholder">
-            <span class="placeholder-emoji">🌿</span>
-            <span class="placeholder-label">[ Foto do 2º andar — Safari ]</span>
+          <div class="andar-photo-placeholder" style="position:relative;overflow:hidden;">
+            <img src="assets/images/tema-safari.jpg" alt="Safari" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;border-radius:var(--radius-lg);">
+            <span class="placeholder-emoji" style="position:relative;z-index:1;">🌿</span>
+            <span class="placeholder-label" style="position:relative;z-index:1;">2º Andar — Safari</span>
           </div>
           <div class="andar-info">
             <div class="andar-subtitle">2º Andar · Safari</div>
@@ -1369,17 +1371,18 @@
         </div>
       </div>
 
-      <!-- Painel: Universo -->
+      <!-- Painel: Galáxia -->
       <div class="andar-panel andar-space" id="panel-space">
         <div class="andar-content">
-          <div class="andar-photo-placeholder">
-            <span class="placeholder-emoji">🪐</span>
-            <span class="placeholder-label">[ Foto do 3º andar — Universo ]</span>
+          <div class="andar-photo-placeholder" style="position:relative;overflow:hidden;">
+            <img src="assets/images/tema-galaxia.jpg" alt="Galáxia" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;border-radius:var(--radius-lg);">
+            <span class="placeholder-emoji" style="position:relative;z-index:1;">🪐</span>
+            <span class="placeholder-label" style="position:relative;z-index:1;">3º Andar — Galáxia</span>
           </div>
           <div class="andar-info">
-            <div class="andar-subtitle">3º Andar · Universo</div>
+            <div class="andar-subtitle">3º Andar · Galáxia</div>
             <h3>Sem limites para<br>o desenvolvimento</h3>
-            <p style="font-size:15px; color:var(--gray-4); line-height:1.7; margin: 16px 0 24px;">O terceiro andar convida cada criança a descobrir que o potencial não tem fronteiras — como o universo que decora cada parede.</p>
+            <p style="font-size:15px; color:var(--gray-4); line-height:1.7; margin: 16px 0 24px;">O terceiro andar convida cada criança a descobrir que o potencial não tem fronteiras — como a galáxia que decora cada parede.</p>
             <div class="salas-list">
               <div class="sala-item"><span class="sala-icon">🎨</span><div><strong>Andares Temáticos Integrados</strong><span>Identidade visual lúdica e moderna para tornar o percurso terapêutico mais leve</span></div></div>
               <div class="sala-item"><span class="sala-icon">🌳</span><div><strong>Área Externa Integrada</strong><span>Jardim, circulação ao ar livre e ambientes para atividades funcionais</span></div></div>
