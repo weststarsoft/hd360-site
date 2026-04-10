@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HD360 – Clínica Especializada em Autismo | Porto Alegre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #fafaf8;
+      color: #2d2d2d;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       CSS VARIABLES — PALETA DOS 3 ANDARES
+    ============================================================ */
+    :root {
+      /* 1º andar — Fundo do Mar */
+      --ocean-light: #ddeef8;
+      --ocean-mid:   #7aafd4;
+      --ocean-deep:  #4a85b8;
+      --ocean-text:  #1a4a6e;
+
+      /* 2º andar — Safari */
+      --safari-light: #d8edbc;
+      --safari-mid:   #8db84a;
+      --safari-deep:  #5a7a2e;
+      --safari-text:  #2d4a10;
+
+      /* 3º andar — Universo */
+      --space-light: #ddd5f0;
+      --space-mid:   #8b6fbe;
+      --space-deep:  #5c3d8f;
+      --space-text:  #2a1654;
+
+      /* Neutros */
+      --white:  #ffffff;
+      --cream:  #faf9f6;
+      --gray-1: #f4f3ef;
+      --gray-2: #e8e6e0;
+      --gray-3: #b0ada4;
+      --gray-4: #6b6860;
+      --dark:   #1e1e1e;
+
+      /* Tipografia */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'Nunito', sans-serif;
+
+      /* Espaçamentos */
+      --section-pad: 100px 5%;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --radius-xl: 48px;
+    }
+
+    /* ============================================================
+       UTILITÁRIOS
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .tag-ocean  { background: var(--ocean-light);  color: var(--ocean-text); }
+    .tag-safari { background: var(--safari-light); color: var(--safari-text); }
+    .tag-space  { background: var(--space-light);  color: var(--space-text); }
+    .tag-neutral { background: var(--gray-1); color: var(--gray-4); }
+
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    h2.section-title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    p.section-sub {
+      font-size: 17px;
+      color: var(--gray-4);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(250,249,246,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-2);
+      transition: all 0.3s ease;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--ocean-mid), var(--space-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-4);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--dark); background: var(--gray-1); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .btn-casa-aba {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--safari-text);
+      background: var(--safari-light);
+      border: 1.5px solid var(--safari-mid);
+      padding: 9px 18px;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+    .btn-casa-aba:hover { background: var(--safari-mid); color: white; }
+    .btn-agendar {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      background: var(--ocean-deep);
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+    .btn-agendar:hover { background: var(--ocean-text); }
+    .nav-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--ocean-text);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    /* Placeholder para vídeo/slideshow — substitua pelo seu vídeo real */
+    .hero-media-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #1a4a6e 0%, #2d6a9f 40%, #4a85b8 70%, #7aafd4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Elementos decorativos do fundo do mar no hero */
+    .hero-wave {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      opacity: 0.15;
+    }
+    .hero-bubbles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100%) scale(0.8); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(26,74,110,0.85) 50%, rgba(26,74,110,0.3) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 5% 80px;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 6px 16px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #7aafd4; }
+    .hero-eyebrow span { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 22px;
+      max-width: 680px;
+    }
+    .hero-title strong { font-weight: 600; display: block; }
+    .hero-title em { font-style: italic; color: #b8d8f0; }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-hero-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white;
+      color: var(--ocean-text);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 15px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-hero-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      flex-wrap: wrap;
+    }
+    .hero-stat .num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 600;
+      color: #b8d8f0;
+      line-height: 1;
+    }
+    .hero-stat .lbl { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .scroll-arrow {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      animation: bounce 2s ease infinite;
+    }
+    .scroll-arrow svg { width: 14px; height: 14px; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ============================================================
+       SECTION: ÁREAS DE ATUAÇÃO (carrossel horizontal)
+    ============================================================ */
+    #areas {
+      padding: var(--section-pad);
+      background: var(--cream);
+      overflow: hidden;
+    }
+    .areas-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .areas-nav { display: flex; gap: 10px; }
+    .slider-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gray-2);
+      background: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .slider-btn:hover { background: var(--ocean-deep); border-color: var(--ocean-deep); }
+    .slider-btn:hover svg { stroke: white; }
+    .slider-btn svg { width: 18px; height: 18px; stroke: var(--gray-4); fill: none; stroke-width: 2; }
+    .areas-track-wrap { overflow: hidden; margin: 0 -5%; padding: 0 5%; }
+    .areas-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .area-card {
+      flex: 0 0 280px;
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      border: 1px solid var(--gray-2);
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .area-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+    .area-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    .area-card h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    .area-card p { font-size: 14px; color: var(--gray-4); line-height: 1.6; }
+
+    /* ============================================================
+       SECTION: ESPECIALIDADES
+    ============================================================ */
+    #especialidades {
+      padding: var(--section-pad);
+      background: var(--ocean-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .especialidades-bg-wave {
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      pointer-events: none;
+    }
+    .especialidades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .especialidade-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid rgba(122,175,212,0.25);
+      transition: all 0.3s;
+    }
+    .especialidade-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(74,133,184,0.15); }
+    .esp-icon { font-size: 32px; margin-bottom: 12px; }
+    .especialidade-card h3 { font-size: 15px; font-weight: 700; color: var(--ocean-text); }
+
+    /* ============================================================
+       SECTION: PROGRAMAS ESPECIALIZADOS
+    ============================================================ */
+    #programas {
+      padding: var(--section-pad);
+      background: var(--cream);
+    }
+    .programas-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 20px;
+    }
+    .programas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .programa-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gray-2);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      transition: all 0.2s;
+    }
+    .programa-item:hover { border-color: var(--ocean-mid); color: var(--ocean-text); }
+    .programa-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--ocean-mid);
+      flex-shrink: 0;
+    }
+    .programas-visual {
+      position: sticky;
+      top: 100px;
+    }
+    .programas-card-big {
+      background: linear-gradient(135deg, var(--ocean-light) 0%, #c5dff0 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      border: 1px solid rgba(122,175,212,0.3);
+    }
+    .programas-card-big h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--ocean-text);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .programas-card-big p { font-size: 15px; color: var(--ocean-deep); line-height: 1.7; }
+
+    /* ============================================================
+       SECTION: NOSSO ATENDIMENTO (cards slider interativo)
+    ============================================================ */
+    #atendimento {
+      padding: var(--section-pad);
+      background: var(--safari-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .atendimento-header { margin-bottom: 48px; }
+    .atendimento-slider-wrap { position: relative; }
+    .atendimento-track-outer { overflow: hidden; }
+    .atendimento-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .atendimento-card {
+      flex: 0 0 360px;
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      border: 1px solid rgba(141,184,74,0.2);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .atendimento-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--safari-mid);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .atendimento-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(90,122,46,0.15); }
+    .atend-num {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 300;
+      color: var(--safari-light);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .atendimento-card h3 { font-size: 20px; font-weight: 700; color: var(--safari-text); margin-bottom: 14px; }
+    .atendimento-card p { font-size: 15px; color: var(--gray-4); line-height: 1.7; }
+    .atendimento-nav { display: flex; gap: 10px; margin-top: 32px; }
+
+    /* ============================================================
+       SECTION: ESTRUTURA — OS 3 ANDARES
+    ============================================================ */
+    #estrutura {
+      padding: var(--section-pad);
+      background: var(--cream);
+    }
+    .estrutura-header { text-align: center; margin-bottom: 64px; }
+    .estrutura-header p.section-sub { margin: 0 auto; text-align: center; }
+    .andares-tabs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .andar-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 40px;
+      border: 1.5px solid var(--gray-2);
+      background: white;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-4);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .andar-tab.active-ocean  { background: var(--ocean-light);  border-color: var(--ocean-mid);  color: var(--ocean-text); }
+    .andar-tab.active-safari { background: var(--safari-light); border-color: var(--safari-mid); color: var(--safari-text); }
+    .andar-tab.active-space  { background: var(--space-light);  border-color: var(--space-mid);  color: var(--space-text); }
+    .andar-tab-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-ocean  { background: var(--ocean-mid); }
+    .dot-safari { background: var(--safari-mid); }
+    .dot-space  { background: var(--space-mid); }
+
+    .andar-panel { display: none; }
+    .andar-panel.active { display: block; }
+
+    .andar-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .andar-photo-placeholder {
+      border-radius: var(--radius-lg);
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 2px dashed;
+      position: relative;
+      overflow: hidden;
+    }
+    .andar-photo-placeholder .placeholder-emoji { font-size: 48px; }
+    .andar-photo-placeholder .placeholder-label { opacity: 0.6; }
+
+    .andar-ocean  .andar-photo-placeholder { background: var(--ocean-light);  border-color: var(--ocean-mid);  color: var(--ocean-text); }
+    .andar-safari .andar-photo-placeholder { background: var(--safari-light); border-color: var(--safari-mid); color: var(--safari-text); }
+    .andar-space  .andar-photo-placeholder { background: var(--space-light);  border-color: var(--space-mid);  color: var(--space-text); }
+
+    .andar-info h3 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .andar-ocean  .andar-info h3 { color: var(--ocean-text); }
+    .andar-safari .andar-info h3 { color: var(--safari-text); }
+    .andar-space  .andar-info h3 { color: var(--space-text); }
+
+    .andar-subtitle { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
+    .andar-ocean  .andar-subtitle { color: var(--ocean-mid); }
+    .andar-safari .andar-subtitle { color: var(--safari-mid); }
+    .andar-space  .andar-subtitle { color: var(--space-mid); }
+
+    .salas-list { display: flex; flex-direction: column; gap: 10px; }
+    .sala-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+    }
+    .andar-ocean  .sala-item { background: var(--ocean-light);  border-color: rgba(122,175,212,0.3); }
+    .andar-safari .sala-item { background: var(--safari-light); border-color: rgba(141,184,74,0.3); }
+    .andar-space  .sala-item { background: var(--space-light);  border-color: rgba(139,111,190,0.3); }
+
+    .sala-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .sala-item strong { font-size: 14px; font-weight: 700; display: block; margin-bottom: 2px; }
+    .sala-item span { font-size: 13px; color: var(--gray-4); line-height: 1.5; }
+    .andar-ocean  .sala-item strong { color: var(--ocean-text); }
+    .andar-safari .sala-item strong { color: var(--safari-text); }
+    .andar-space  .sala-item strong { color: var(--space-text); }
+
+    /* ============================================================
+       SECTION: JORNADA DA FAMÍLIA (steps)
+    ============================================================ */
+    #jornada {
+      padding: var(--section-pad);
+      background: var(--space-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .jornada-header { text-align: center; margin-bottom: 64px; }
+    .jornada-header .section-title { color: var(--space-text); }
+    .jornada-header .section-sub { margin: 0 auto; text-align: center; color: var(--space-mid); }
+    .jornada-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .jornada-step {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      border: 1px solid rgba(139,111,190,0.2);
+      transition: all 0.3s;
+      position: relative;
+    }
+    .jornada-step:first-child {
+      background: var(--space-mid);
+      border-color: var(--space-mid);
+    }
+    .jornada-step:first-child .step-num,
+    .jornada-step:first-child h3,
+    .jornada-step:first-child p { color: white; }
+    .jornada-step:first-child .step-num { color: rgba(255,255,255,0.4); }
+    .jornada-step:hover:not(:first-child) { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(92,61,143,0.12); }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--space-light);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .jornada-step h3 { font-size: 20px; font-weight: 700; color: var(--space-text); margin-bottom: 12px; }
+    .jornada-step p { font-size: 14px; color: var(--gray-4); line-height: 1.7; }
+    .step-cta-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: white;
+      color: var(--space-text);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .step-cta-btn:hover { background: var(--space-light); }
+
+    /* ============================================================
+       SECTION: HD360 vs CLÍNICAS COMUNS
+    ============================================================ */
+    #diferenciais {
+      padding: var(--section-pad);
+      background: var(--cream);
+    }
+    .diferenciais-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--gray-2);
+      margin-top: 48px;
+    }
+    .diff-col {
+      padding: 48px 40px;
+    }
+    .diff-col-left { background: var(--gray-1); }
+    .diff-col-right { background: var(--ocean-deep); }
+    .diff-col h3 { font-size: 18px; font-weight: 700; margin-bottom: 32px; }
+    .diff-col-left h3 { color: var(--gray-4); }
+    .diff-col-right h3 { color: rgba(255,255,255,0.6); }
+    .diff-items { display: flex; flex-direction: column; gap: 16px; }
+    .diff-item { display: flex; align-items: flex-start; gap: 12px; }
+    .diff-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .diff-icon-no  { background: rgba(0,0,0,0.08); }
+    .diff-icon-yes { background: rgba(255,255,255,0.15); }
+    .diff-icon svg { width: 12px; height: 12px; }
+    .diff-col-left  .diff-item span { font-size: 15px; color: var(--gray-4); line-height: 1.5; }
+    .diff-col-right .diff-item span { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+    /* ============================================================
+       SECTION: DEPOIMENTOS
+    ============================================================ */
+    #depoimentos {
+      padding: var(--section-pad);
+      background: var(--cream);
+      overflow: hidden;
+    }
+    .depoimentos-header { margin-bottom: 48px; }
+    .depoimentos-track-wrap { overflow: hidden; }
+    .depoimentos-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .depoimento-card {
+      flex: 0 0 380px;
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      border: 1px solid var(--gray-2);
+    }
+    .depo-quote {
+      font-family: var(--font-display);
+      font-size: 52px;
+      line-height: 1;
+      color: var(--ocean-light);
+      margin-bottom: 8px;
+    }
+    .depoimento-card p {
+      font-size: 16px;
+      color: var(--gray-4);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    .depo-author { display: flex; align-items: center; gap: 12px; }
+    .depo-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .depo-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .depo-role { font-size: 12px; color: var(--gray-3); margin-top: 2px; }
+    .depoimentos-nav { display: flex; gap: 10px; margin-top: 32px; }
+
+    /* ============================================================
+       SECTION: CTA FINAL
+    ============================================================ */
+    #cta {
+      padding: 120px 5%;
+      background: linear-gradient(135deg, var(--ocean-text) 0%, #2d5a8e 50%, var(--space-deep) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      top: -200px; right: -100px;
+    }
+    .cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); margin-bottom: 24px; }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .cta-title em { font-style: italic; color: #b8d8f0; }
+    .cta-sub { font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 40px; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-main {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white;
+      color: var(--ocean-text);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 17px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-cta-main:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+    .btn-cta-whats {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #25d366;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 16px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-cta-whats:hover { background: #1fb058; transform: translateY(-2px); }
+    .cta-footer-note { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.35); }
+
+    /* ============================================================
+       RODAPÉ
+    ============================================================ */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-top {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand { margin-bottom: 16px; }
+    .footer-logo-text {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.4); }
+    .footer-unidade {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+    .footer-unidade strong { display: block; color: rgba(255,255,255,0.75); font-weight: 700; margin-bottom: 4px; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ============================================================
+       WHATSAPP FLUTUANTE
+    ============================================================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .nav-links, .nav-actions { display: none; }
+      .nav-links.open, .nav-actions.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .andar-content { grid-template-columns: 1fr; }
+      .programas-layout { grid-template-columns: 1fr; }
+      .programas-visual { position: static; }
+      .jornada-steps { grid-template-columns: 1fr; }
+      .diferenciais-grid { grid-template-columns: 1fr; }
+      .areas-header { flex-direction: column; align-items: flex-start; }
+      .hero-stats { gap: 24px; }
+    }
+    @media (max-width: 600px) {
+      .footer-top { grid-template-columns: 1fr; }
+      :root { --section-pad: 64px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================
+       NAVBAR
+  ============================= -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <!-- Substitua o logo-mark pela sua logo real -->
+        <div class="nav-logo-mark">HD</div>
+        <span class="nav-logo-text">HD360</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#areas">Áreas de Atuação</a></li>
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#estrutura">Estrutura</a></li>
+        <li><a href="#jornada">Nossa Jornada</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+      </ul>
+      <div class="nav-actions" id="navActions">
+        <a href="casa-aba.html" class="btn-casa-aba">🌿 Casa ABA</a>
+        <a href="#cta" class="btn-agendar">Agendar avaliação</a>
+      </div>
+      <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================
+       HERO
+  ============================= -->
+  <section id="hero">
+    <div class="hero-bg">
+      <!--
+        COMO ADICIONAR SEU VÍDEO:
+        Substitua o bloco abaixo por:
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+          <source src="assets/video-clinica.mp4" type="video/mp4">
+        </video>
+      -->
+      <div class="hero-media-placeholder">
+        <div class="hero-bubbles" id="bubbles"></div>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">
+        <div class="hero-eyebrow-dot"></div>
+        <span>Especialistas em neurodesenvolvimento · Porto Alegre, RS</span>
+      </div>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Cada criança tem<br>
+        <strong>seu próprio<br><em>potencial.</em></strong>
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Na HD360, desenvolvemos esse potencial com ciência, estrutura de excelência e um ambiente feito para acolher cada família.
+      </p>
+      <div class="hero-buttons reveal reveal-delay-3">
+        <a href="#cta" class="btn-hero-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          Agendar avaliação
+        </a>
+        <a href="#estrutura" class="btn-hero-secondary">
+          Conhecer a clínica →
+        </a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div class="hero-stat">
+          <div class="num">700m²</div>
+          <div class="lbl">de estrutura na Quintino</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">3</div>
+          <div class="lbl">andares temáticos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">2</div>
+          <div class="lbl">unidades em Porto Alegre</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">8+</div>
+          <div class="lbl">especialidades</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Role para baixo</span>
+      <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       ÁREAS DE ATUAÇÃO
+  ============================= -->
+  <section id="areas">
+    <div class="container">
+      <div class="areas-header">
+        <div>
+          <span class="tag tag-ocean reveal">Nossas áreas de atuação</span>
+          <h2 class="section-title reveal reveal-delay-1">Encontre o cuidado<br><em>certo para o seu filho</em></h2>
+          <p class="section-sub reveal reveal-delay-2">Nossa equipe multidisciplinar oferece terapias com práticas baseadas em evidências científicas.</p>
+        </div>
+        <div class="areas-nav">
+          <button class="slider-btn" onclick="slideAreas(-1)">
+            <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+          </button>
+          <button class="slider-btn" onclick="slideAreas(1)">
+            <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="areas-track-wrap">
+      <div class="areas-track" id="areasTrack">
+        <div class="area-card reveal">
+          <div class="area-icon" style="background:#ddeef8;">🧠</div>
+          <h3>Terapia Ocupacional</h3>
+          <p>Promove autonomia em atividades diárias, integração sensorial e coordenação motora.</p>
+        </div>
+        <div class="area-card reveal reveal-delay-1">
+          <div class="area-icon" style="background:#d8edbc;">🏃</div>
+          <h3>Psicomotricidade</h3>
+          <p>Desenvolvimento da consciência corporal, equilíbrio, coordenação e habilidades motoras globais.</p>
+        </div>
+        <div class="area-card reveal reveal-delay-2">
+          <div class="area-icon" style="background:#ddd5f0;">🗣️</div>
+          <h3>Fonoaudiologia</h3>
+          <p>Habilitação e reabilitação da comunicação, linguagem, voz, audição, leitura e escrita.</p>
+        </div>
+        <div class="area-card reveal reveal-delay-3">
+          <div class="area-icon" style="background:#ddeef8;">💬</div>
+          <h3>Psicologia</h3>
+          <p>Suporte emocional e comportamental, com foco em ABA e abordagens baseadas em evidência.</p>
+        </div>
+        <div class="area-card reveal">
+          <div class="area-icon" style="background:#d8edbc;">🦴</div>
+          <h3>Fisioterapia</h3>
+          <p>Desenvolvimento motor, mobilidade, força e funcionalidade para crianças e adolescentes.</p>
+        </div>
+        <div class="area-card reveal reveal-delay-1">
+          <div class="area-icon" style="background:#ddd5f0;">🎵</div>
+          <h3>Musicoterapia</h3>
+          <p>Uso terapêutico da música para estimular comunicação, emoção e desenvolvimento cognitivo.</p>
+        </div>
+        <div class="area-card reveal reveal-delay-2">
+          <div class="area-icon" style="background:#ddeef8;">🤝</div>
+          <h3>Acompanhamento Terapêutico</h3>
+          <p>Suporte individualizado no ambiente natural da criança — escola, casa e comunidade.</p>
+        </div>
+        <div class="area-card reveal reveal-delay-3">
+          <div class="area-icon" style="background:#d8edbc;">📚</div>
+          <h3>Psicopedagogia</h3>
+          <p>Intervenção nas dificuldades de aprendizagem, com foco na inclusão educacional e autonomia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       ESPECIALIDADES
+  ============================= -->
+  <section id="especialidades">
+    <div class="container">
+      <span class="tag tag-ocean reveal">Especialidades</span>
+      <h2 class="section-title reveal reveal-delay-1">Estrutura completa<br><em>sob um mesmo teto</em></h2>
+      <div class="especialidades-grid">
+        <div class="especialidade-card reveal"><div class="esp-icon">🧩</div><h3>Terapia ABA</h3></div>
+        <div class="especialidade-card reveal reveal-delay-1"><div class="esp-icon">🎓</div><h3>Psicopedagogia</h3></div>
+        <div class="especialidade-card reveal reveal-delay-2"><div class="esp-icon">🗣️</div><h3>Fonoaudiologia</h3></div>
+        <div class="especialidade-card reveal reveal-delay-3"><div class="esp-icon">💬</div><h3>Psicologia</h3></div>
+        <div class="especialidade-card reveal"><div class="esp-icon">🏃</div><h3>Fisioterapia</h3></div>
+        <div class="especialidade-card reveal reveal-delay-1"><div class="esp-icon">🎵</div><h3>Musicoterapia</h3></div>
+        <div class="especialidade-card reveal reveal-delay-2"><div class="esp-icon">✋</div><h3>Terapia Ocupacional</h3></div>
+        <div class="especialidade-card reveal reveal-delay-3"><div class="esp-icon">🤝</div><h3>Acomp. Terapêutico</h3></div>
+      </div>
+    </div>
+    <!-- Onda decorativa -->
+    <svg class="especialidades-bg-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 C360,20 1080,20 1440,80 L1440,80 L0,80 Z" fill="#faf9f6"/>
+    </svg>
+  </section>
+
+  <!-- ============================
+       PROGRAMAS ESPECIALIZADOS
+  ============================= -->
+  <section id="programas">
+    <div class="container">
+      <div class="programas-layout">
+        <div>
+          <span class="tag tag-neutral reveal">Programas especializados</span>
+          <h2 class="section-title reveal reveal-delay-1">Intervenções baseadas<br><em>em evidência</em></h2>
+          <div class="programas-list">
+            <div class="programa-item reveal"><div class="programa-dot"></div>Análise aplicada do comportamento (ABA)</div>
+            <div class="programa-item reveal reveal-delay-1"><div class="programa-dot"></div>Avaliação neuropsicológica</div>
+            <div class="programa-item reveal reveal-delay-2"><div class="programa-dot"></div>Avaliação e tratamento fonoaudiológico</div>
+            <div class="programa-item reveal reveal-delay-1"><div class="programa-dot"></div>Integração de funções executivas</div>
+            <div class="programa-item reveal reveal-delay-2"><div class="programa-dot"></div>Integração sensorial (Método Ayres)</div>
+            <div class="programa-item reveal"><div class="programa-dot"></div>Distúrbio alimentar pediátrico (DAP)</div>
+            <div class="programa-item reveal reveal-delay-1"><div class="programa-dot"></div>Manejo comportamental</div>
+            <div class="programa-item reveal reveal-delay-2"><div class="programa-dot"></div>Inclusão educacional — Elaboração de PEI</div>
+            <div class="programa-item reveal"><div class="programa-dot"></div>Alfabetização tardia</div>
+            <div class="programa-item reveal reveal-delay-1"><div class="programa-dot"></div>Grupos de habilidades sociais</div>
+            <div class="programa-item reveal reveal-delay-2"><div class="programa-dot"></div>Grupos de psicoeducação</div>
+            <div class="programa-item reveal"><div class="programa-dot"></div>Estimulação precoce</div>
+            <div class="programa-item reveal reveal-delay-1"><div class="programa-dot"></div>Orientação parental</div>
+          </div>
+        </div>
+        <div class="programas-visual reveal reveal-delay-2">
+          <div class="programas-card-big">
+            <h3>Ciência a serviço do desenvolvimento</h3>
+            <p>Todos os nossos programas são fundamentados nas mais recentes pesquisas sobre neurodesenvolvimento e autismo. Nossa equipe se atualiza continuamente para oferecer o que há de melhor.</p>
+          </div>
+          <div style="margin-top: 20px; background: white; border-radius: var(--radius-md); padding: 28px; border: 1px solid var(--gray-2);">
+            <div style="font-size: 13px; font-weight: 700; color: var(--gray-4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Unidade Quintino · 700m²</div>
+            <div style="font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px;">30 salas de atendimento individual</div>
+            <div style="font-size: 13px; color: var(--gray-3);">Moinhos de Vento, Porto Alegre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       NOSSO ATENDIMENTO
+  ============================= -->
+  <section id="atendimento">
+    <div class="container">
+      <div class="atendimento-header">
+        <span class="tag tag-safari reveal">Nosso atendimento</span>
+        <h2 class="section-title reveal reveal-delay-1">Muito além das<br><em>terapias individuais</em></h2>
+        <p class="section-sub reveal reveal-delay-2">Oferecemos um ecossistema completo de suporte para a criança e para toda a família.</p>
+      </div>
+    </div>
+    <div style="padding: 0 5%;">
+      <div class="atendimento-track-outer">
+        <div class="atendimento-track" id="atendTrack">
+          <div class="atendimento-card reveal">
+            <div class="atend-num">01</div>
+            <h3>Atendimento Especializado</h3>
+            <p>Atendimento individualizado e personalizado para cada paciente, com abordagens adaptadas às necessidades específicas de cada criança.</p>
+          </div>
+          <div class="atendimento-card reveal reveal-delay-1">
+            <div class="atend-num">02</div>
+            <h3>Orientação Parental</h3>
+            <p>Apoiamos os pais e cuidadores no entendimento das necessidades de seus filhos, com orientação e estratégias práticas para o dia a dia.</p>
+          </div>
+          <div class="atendimento-card reveal reveal-delay-2">
+            <div class="atend-num">03</div>
+            <h3>Supervisão para Profissionais</h3>
+            <p>Oferecemos supervisão especializada para profissionais de saúde, garantindo a qualidade e eficácia dos tratamentos.</p>
+          </div>
+          <div class="atendimento-card reveal reveal-delay-3">
+            <div class="atend-num">04</div>
+            <h3>Cursos e Palestras</h3>
+            <p>Realizamos cursos e palestras para pais, familiares e profissionais, compartilhando conhecimento sobre neurodesenvolvimento.</p>
+          </div>
+          <div class="atendimento-card reveal">
+            <div class="atend-num">05</div>
+            <h3>Terapia ABA e Denver</h3>
+            <p>Utilizamos ABA e a abordagem Denver em ambientes naturalísticos, proporcionando aprendizado mais realista e eficaz para cada criança.</p>
+          </div>
+        </div>
+      </div>
+      <div class="atendimento-nav">
+        <button class="slider-btn" onclick="slideAtend(-1)">
+          <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+        </button>
+        <button class="slider-btn" onclick="slideAtend(1)">
+          <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       ESTRUTURA — OS 3 ANDARES
+  ============================= -->
+  <section id="estrutura">
+    <div class="container">
+      <div class="estrutura-header">
+        <span class="tag tag-neutral reveal">Estrutura da clínica</span>
+        <h2 class="section-title reveal reveal-delay-1">Três andares,<br><em>três mundos de descoberta</em></h2>
+        <p class="section-sub reveal reveal-delay-2">Cada andar da nossa unidade Quintino foi projetado com uma temática única — para tornar cada visita uma experiência especial.</p>
+      </div>
+
+      <!-- Tabs dos andares -->
+      <div class="andares-tabs reveal reveal-delay-3">
+        <button class="andar-tab active-ocean" onclick="showAndar('ocean', this)">
+          <span class="andar-tab-dot dot-ocean"></span>
+          🌊 1º Andar — Fundo do Mar
+        </button>
+        <button class="andar-tab" onclick="showAndar('safari', this)">
+          <span class="andar-tab-dot dot-safari"></span>
+          🌿 2º Andar — Safari
+        </button>
+        <button class="andar-tab" onclick="showAndar('space', this)">
+          <span class="andar-tab-dot dot-space"></span>
+          🪐 3º Andar — Universo
+        </button>
+      </div>
+
+      <!-- Painel: Fundo do Mar -->
+      <div class="andar-panel andar-ocean active" id="panel-ocean">
+        <div class="andar-content">
+          <div class="andar-photo-placeholder">
+            <span class="placeholder-emoji">🌊</span>
+            <span class="placeholder-label">[ Foto do 1º andar — Fundo do Mar ]</span>
+          </div>
+          <div class="andar-info">
+            <div class="andar-subtitle">1º Andar · Fundo do Mar</div>
+            <h3>Um mergulho no<br>desenvolvimento</h3>
+            <p style="font-size:15px; color:var(--gray-4); line-height:1.7; margin: 16px 0 24px;">Com aproximadamente 700m² distribuídos em ambientes temáticos, o primeiro andar acolhe as famílias com a leveza e a calma do fundo do mar.</p>
+            <div class="salas-list">
+              <div class="sala-item"><span class="sala-icon">🛋️</span><div><strong>30 Salas de Atendimento Individual</strong><span>Conforto, privacidade e estrutura acústica para todas as especialidades</span></div></div>
+              <div class="sala-item"><span class="sala-icon">🍽️</span><div><strong>Cozinha Terapêutica</strong><span>Seletividade alimentar e introdução de novos alimentos</span></div></div>
+              <div class="sala-item"><span class="sala-icon">♿</span><div><strong>Acessibilidade Total</strong><span>Elevador, banheiros adaptados, rampas e circulação ampla</span></div></div>
+              <div class="sala-item"><span class="sala-icon">💼</span><div><strong>Coworking para Responsáveis</strong><span>Mesas, tomadas, wi-fi e conforto durante os atendimentos</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Painel: Safari -->
+      <div class="andar-panel andar-safari" id="panel-safari">
+        <div class="andar-content">
+          <div class="andar-photo-placeholder">
+            <span class="placeholder-emoji">🌿</span>
+            <span class="placeholder-label">[ Foto do 2º andar — Safari ]</span>
+          </div>
+          <div class="andar-info">
+            <div class="andar-subtitle">2º Andar · Safari</div>
+            <h3>Explorar, aprender<br>e se desenvolver</h3>
+            <p style="font-size:15px; color:var(--gray-4); line-height:1.7; margin: 16px 0 24px;">O segundo andar traz a vitalidade da natureza para o cotidiano terapêutico, com espaços que estimulam o movimento, a exploração e a autonomia.</p>
+            <div class="salas-list">
+              <div class="sala-item"><span class="sala-icon">🤸</span><div><strong>Integração Sensorial — Método Ayres</strong><span>Equipamentos modernos, equilíbrio e estímulos sensoriais de alta qualidade</span></div></div>
+              <div class="sala-item"><span class="sala-icon">💪</span><div><strong>Fisioterapia e Psicomotricidade</strong><span>Desenvolvimento motor, coordenação, força e mobilidade</span></div></div>
+              <div class="sala-item"><span class="sala-icon">🧘</span><div><strong>Sala de Descompressão</strong><span>Design acolhedor para regular e reorganizar emoções em momentos de sobrecarga</span></div></div>
+              <div class="sala-item"><span class="sala-icon">🏠</span><div><strong>Sala de AVDs</strong><span>Cenários reais para treinar autonomia, rotina e autocuidado</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Painel: Universo -->
+      <div class="andar-panel andar-space" id="panel-space">
+        <div class="andar-content">
+          <div class="andar-photo-placeholder">
+            <span class="placeholder-emoji">🪐</span>
+            <span class="placeholder-label">[ Foto do 3º andar — Universo ]</span>
+          </div>
+          <div class="andar-info">
+            <div class="andar-subtitle">3º Andar · Universo</div>
+            <h3>Sem limites para<br>o desenvolvimento</h3>
+            <p style="font-size:15px; color:var(--gray-4); line-height:1.7; margin: 16px 0 24px;">O terceiro andar convida cada criança a descobrir que o potencial não tem fronteiras — como o universo que decora cada parede.</p>
+            <div class="salas-list">
+              <div class="sala-item"><span class="sala-icon">🎨</span><div><strong>Andares Temáticos Integrados</strong><span>Identidade visual lúdica e moderna para tornar o percurso terapêutico mais leve</span></div></div>
+              <div class="sala-item"><span class="sala-icon">🌳</span><div><strong>Área Externa Integrada</strong><span>Jardim, circulação ao ar livre e ambientes para atividades funcionais</span></div></div>
+              <div class="sala-item"><span class="sala-icon">🚀</span><div><strong>Espaços de Aprendizado Avançado</strong><span>Ambientes especializados para programas de inclusão e habilidades sociais</span></div></div>
+              <div class="sala-item"><span class="sala-icon">⭐</span><div><strong>Estimulação em Ambiente Naturalístico</strong><span>Terapia ABA e Denver em contextos reais do dia a dia</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       JORNADA DA FAMÍLIA
+  ============================= -->
+  <section id="jornada">
+    <div class="container">
+      <div class="jornada-header">
+        <span class="tag tag-space reveal">Como funciona</span>
+        <h2 class="section-title reveal reveal-delay-1">A jornada da sua<br><em>família na HD360</em></h2>
+        <p class="section-sub reveal reveal-delay-2">Do primeiro contato até o desenvolvimento contínuo — estamos com você em cada etapa.</p>
+      </div>
+      <div class="jornada-steps">
+        <div class="jornada-step reveal">
+          <div class="step-num">1.</div>
+          <h3>Entre em contato</h3>
+          <p>Preencha nosso formulário ou nos chame no WhatsApp. Em até 2h entramos em contato para agendar uma apresentação.</p>
+          <a href="#cta" class="step-cta-btn">Falar agora →</a>
+        </div>
+        <div class="jornada-step reveal reveal-delay-1">
+          <div class="step-num">2.</div>
+          <h3>Avaliação inicial</h3>
+          <p>Nossa equipe realiza uma avaliação completa da criança para entender suas necessidades e criar um plano terapêutico individualizado.</p>
+        </div>
+        <div class="jornada-step reveal reveal-delay-2">
+          <div class="step-num">3.</div>
+          <h3>Hora de evoluir!</h3>
+          <p>Com o plano em mãos, a criança começa sua jornada terapêutica em um ambiente acolhedor, seguro e preparado para ela.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       HD360 vs CLÍNICAS COMUNS
+  ============================= -->
+  <section id="diferenciais">
+    <div class="container">
+      <span class="tag tag-neutral reveal">Por que a HD360</span>
+      <h2 class="section-title reveal reveal-delay-1">A diferença que<br><em>você vai sentir</em></h2>
+      <div class="diferenciais-grid reveal reveal-delay-2">
+        <div class="diff-col diff-col-left">
+          <h3>Clínicas tradicionais</h3>
+          <div class="diff-items">
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-no"><svg viewBox="0 0 24 24" stroke="#999" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <span>Atendimento genérico, sem personalização</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-no"><svg viewBox="0 0 24 24" stroke="#999" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <span>Profissionais que não se comunicam entre si</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-no"><svg viewBox="0 0 24 24" stroke="#999" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <span>Ambiente sem adaptação sensorial</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-no"><svg viewBox="0 0 24 24" stroke="#999" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <span>Família excluída do processo terapêutico</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-no"><svg viewBox="0 0 24 24" stroke="#999" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <span>Poucas especialidades sob o mesmo teto</span>
+            </div>
+          </div>
+        </div>
+        <div class="diff-col diff-col-right">
+          <h3>HD360</h3>
+          <div class="diff-items">
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-yes"><svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div>
+              <span>Plano terapêutico 100% individualizado</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-yes"><svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div>
+              <span>Equipe multidisciplinar integrada e comunicada</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-yes"><svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div>
+              <span>700m² com ambientes sensorialmente planejados</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-yes"><svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div>
+              <span>Orientação parental e família como parceira</span>
+            </div>
+            <div class="diff-item">
+              <div class="diff-icon diff-icon-yes"><svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg></div>
+              <span>8+ especialidades em 2 unidades em POA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       DEPOIMENTOS
+  ============================= -->
+  <section id="depoimentos">
+    <div class="container">
+      <div class="depoimentos-header">
+        <span class="tag tag-ocean reveal">Depoimentos</span>
+        <h2 class="section-title reveal reveal-delay-1">O que as famílias<br><em>dizem da HD360</em></h2>
+      </div>
+    </div>
+    <div style="padding: 0 5%; overflow: hidden;">
+      <div class="depoimentos-track" id="depoTrack">
+        <!-- Depoimento placeholder 1 -->
+        <div class="depoimento-card reveal">
+          <div class="depo-quote">"</div>
+          <p>Desde que meu filho começou o atendimento na HD360, a evolução foi incrível. Hoje ele se comunica e interage de um jeito que nunca imaginei ser possível.</p>
+          <div class="depo-author">
+            <div class="depo-avatar" style="background:var(--ocean-light); color:var(--ocean-text);">MA</div>
+            <div>
+              <div class="depo-name">Mãe de Lucas</div>
+              <div class="depo-role">Em atendimento há 1 ano · Unidade Quintino</div>
+            </div>
+          </div>
+        </div>
+        <!-- Depoimento placeholder 2 -->
+        <div class="depoimento-card reveal reveal-delay-1">
+          <div class="depo-quote">"</div>
+          <p>A equipe é extraordinária. Além de cuidar do nosso filho com muita dedicação, nos ensinaram a ser melhores pais para ele. A orientação parental mudou nossa vida.</p>
+          <div class="depo-author">
+            <div class="depo-avatar" style="background:var(--safari-light); color:var(--safari-text);">RS</div>
+            <div>
+              <div class="depo-name">Pais do Gabriel</div>
+              <div class="depo-role">Em atendimento há 8 meses · Casa ABA</div>
+            </div>
+          </div>
+        </div>
+        <!-- Depoimento placeholder 3 -->
+        <div class="depoimento-card reveal reveal-delay-2">
+          <div class="depo-quote">"</div>
+          <p>A estrutura da clínica é impressionante. Minha filha adora os andares temáticos — ela chega animada para as sessões. Isso faz toda a diferença no tratamento.</p>
+          <div class="depo-author">
+            <div class="depo-avatar" style="background:var(--space-light); color:var(--space-text);">CM</div>
+            <div>
+              <div class="depo-name">Mãe da Sofia</div>
+              <div class="depo-role">Em atendimento há 6 meses · Unidade Quintino</div>
+            </div>
+          </div>
+        </div>
+        <!-- Espaço para depoimentos reais -->
+        <div class="depoimento-card reveal reveal-delay-3" style="border-style: dashed; display:flex; align-items:center; justify-content:center; min-height: 200px;">
+          <div style="text-align:center; color: var(--gray-3);">
+            <div style="font-size: 32px; margin-bottom: 8px;">+</div>
+            <div style="font-size: 14px; font-weight: 600;">Seu depoimento aqui em breve</div>
+          </div>
+        </div>
+      </div>
+      <div class="depoimentos-nav">
+        <button class="slider-btn" onclick="slideDepo(-1)">
+          <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+        </button>
+        <button class="slider-btn" onclick="slideDepo(1)">
+          <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       CTA FINAL
+  ============================= -->
+  <section id="cta">
+    <div class="cta-inner">
+      <span class="tag cta-tag reveal">Próximo passo</span>
+      <h2 class="cta-title reveal reveal-delay-1">
+        Dê o próximo passo no<br>
+        <em>desenvolvimento do seu filho</em>
+      </h2>
+      <p class="cta-sub reveal reveal-delay-2">
+        Nossa equipe está pronta para te ouvir, entender as necessidades da sua família e criar o melhor plano para a sua criança.
+      </p>
+      <div class="cta-buttons reveal reveal-delay-3">
+        <a href="#" class="btn-cta-main">
+          📋 Agendar avaliação
+        </a>
+        <a href="https://wa.me/55519XXXXXXXX" class="btn-cta-whats" target="_blank">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <div class="cta-footer-note reveal">Resposta em até 2 horas · Porto Alegre, RS</div>
+    </div>
+  </section>
+
+  <!-- ============================
+       RODAPÉ
+  ============================= -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <div class="footer-logo-text">HD360</div>
+          <p>Clínica especializada em neurodesenvolvimento e autismo. Cuidado com ciência, estrutura e amor em Porto Alegre.</p>
+        </div>
+        <div class="footer-unidade">
+          <strong>🌊 Unidade Quintino (Moinhos)</strong>
+          Rua Quintino Bocaiúva, 451<br>Moinhos de Vento · CEP 90440-051
+        </div>
+        <div class="footer-unidade" style="margin-top: 10px;">
+          <strong>🌿 Casa ABA (Mont'Serrat)</strong>
+          Rua Dr. Freire Alemão, 366<br>Mont'Serrat · CEP 90450-060
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="#areas">Áreas de atuação</a>
+        <a href="#especialidades">Especialidades</a>
+        <a href="#programas">Programas</a>
+        <a href="#estrutura">Estrutura</a>
+        <a href="#jornada">Nossa jornada</a>
+        <a href="#depoimentos">Depoimentos</a>
+      </div>
+      <div class="footer-col">
+        <h4>Unidades</h4>
+        <a href="#estrutura">Unidade Quintino</a>
+        <a href="casa-aba.html">Casa ABA</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="https://wa.me/5551900000000">WhatsApp</a>
+        <a href="mailto:contato@hd360.com.br">contato@hd360.com.br</a>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div style="max-width:1200px; margin:0 auto;">
+      <div class="footer-bottom">
+        <span>© 2025 HD360 · Todos os direitos reservados · Porto Alegre, RS</span>
+        <span>Desenvolvido com dedicação para cada família</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Flutuante -->
+  <a href="https://wa.me/5551900000000" class="whatsapp-float" target="_blank" title="Fale no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ============================
+       JAVASCRIPT
+  ============================= -->
+  <script>
+    // --- Bolhas animadas no hero ---
+    (function() {
+      const container = document.getElementById('bubbles');
+      for (let i = 0; i < 18; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = 20 + Math.random() * 80;
+        b.style.cssText = `
+          width: ${size}px; height: ${size}px;
+          left: ${Math.random() * 100}%;
+          animation-duration: ${8 + Math.random() * 12}s;
+          animation-delay: ${Math.random() * 10}s;
+        `;
+        container.appendChild(b);
+      }
+    })();
+
+    // --- Reveal on scroll ---
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // --- Navbar scroll effect ---
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+    });
+
+    // --- Mobile nav toggle ---
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('navActions').classList.toggle('open');
+    }
+
+    // --- Slider: Áreas de Atuação ---
+    let areasIdx = 0;
+    function slideAreas(dir) {
+      const track = document.getElementById('areasTrack');
+      const cards = track.querySelectorAll('.area-card');
+      const cardW = cards[0].offsetWidth + 20;
+      const maxIdx = Math.max(0, cards.length - 3);
+      areasIdx = Math.max(0, Math.min(areasIdx + dir, maxIdx));
+      track.style.transform = `translateX(-${areasIdx * cardW}px)`;
+    }
+
+    // --- Slider: Atendimento ---
+    let atendIdx = 0;
+    function slideAtend(dir) {
+      const track = document.getElementById('atendTrack');
+      const cards = track.querySelectorAll('.atendimento-card');
+      const cardW = cards[0].offsetWidth + 24;
+      const maxIdx = Math.max(0, cards.length - 2);
+      atendIdx = Math.max(0, Math.min(atendIdx + dir, maxIdx));
+      track.style.transform = `translateX(-${atendIdx * cardW}px)`;
+    }
+
+    // --- Slider: Depoimentos ---
+    let depoIdx = 0;
+    function slideDepo(dir) {
+      const track = document.getElementById('depoTrack');
+      const cards = track.querySelectorAll('.depoimento-card');
+      const cardW = cards[0].offsetWidth + 24;
+      const maxIdx = Math.max(0, cards.length - 2);
+      depoIdx = Math.max(0, Math.min(depoIdx + dir, maxIdx));
+      track.style.transform = `translateX(-${depoIdx * cardW}px)`;
+    }
+
+    // --- Tabs dos andares ---
+    function showAndar(theme, btn) {
+      // Esconder todos os painéis
+      document.querySelectorAll('.andar-panel').forEach(p => p.classList.remove('active'));
+      // Remover classe ativa dos botões
+      document.querySelectorAll('.andar-tab').forEach(b => {
+        b.classList.remove('active-ocean', 'active-safari', 'active-space');
+      });
+      // Mostrar painel e ativar botão
+      document.getElementById('panel-' + theme).classList.add('active');
+      btn.classList.add('active-' + theme);
+    }
+  </script>
+</body>
+</html>
