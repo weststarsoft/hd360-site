@@ -1114,12 +1114,7 @@
         </div>
       </div>
     </div>
-    <div class="scroll-indicator">
-      <span>Role para baixo</span>
-      <div class="scroll-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </div>
-    </div>
+
   </section>
 
   <!-- ============================
@@ -1682,15 +1677,58 @@
     });
 
     // --- Slider: Áreas de Atuação ---
-    let areasIdx = 0;
-    function slideAreas(dir) {
+    // --- Carrossel Infinito: Áreas de Atuação ---
+    (function() {
       const track = document.getElementById('areasTrack');
-      const cards = track.querySelectorAll('.area-card');
-      const cardW = cards[0].offsetWidth + 20;
-      const maxIdx = Math.max(0, cards.length - 3);
-      areasIdx = Math.max(0, Math.min(areasIdx + dir, maxIdx));
-      track.style.transform = `translateX(-${areasIdx * cardW}px)`;
-    }
+      if (!track) return;
+
+      // Duplica os cards para criar loop infinito
+      const originalCards = Array.from(track.children);
+      originalCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        track.appendChild(clone);
+      });
+
+      const GAP = 20;
+      let offset = 0;
+      let paused = false;
+      const SPEED = 0.6; // pixels por frame
+
+      function getCardWidth() {
+        return track.children[0].offsetWidth + GAP;
+      }
+
+      function animate() {
+        if (!paused) {
+          offset += SPEED;
+          const totalWidth = getCardWidth() * originalCards.length;
+          if (offset >= totalWidth) {
+            offset -= totalWidth;
+          }
+          track.style.transform = `translateX(-${offset}px)`;
+        }
+        requestAnimationFrame(animate);
+      }
+
+      // Pausa ao passar o mouse
+      track.addEventListener('mouseenter', () => paused = true);
+      track.addEventListener('mouseleave', () => paused = false);
+
+      // Botões de navegação manual
+      window.slideAreas = function(dir) {
+        paused = true;
+        offset += dir * (getCardWidth() * 2);
+        const totalWidth = getCardWidth() * originalCards.length;
+        if (offset < 0) offset += totalWidth;
+        if (offset >= totalWidth) offset -= totalWidth;
+        track.style.transform = `translateX(-${offset}px)`;
+        setTimeout(() => paused = false, 2000);
+      };
+
+      // Remove transition para scroll suave
+      track.style.transition = 'none';
+      animate();
+    })();
 
     // --- Slider: Atendimento ---
     let atendIdx = 0;
