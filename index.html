@@ -1356,8 +1356,6 @@
           <div class="andar-photo-placeholder" style="position:relative;overflow:hidden;">
             <img class="tema-img" src="assets/images/tema-fundo-do-mar.jpg" alt="Fundo do Mar">
             <div class="color-overlay"></div>
-            <span class="placeholder-emoji">🌊</span>
-            <span class="placeholder-label">1º Andar — Fundo do Mar</span>
           </div>
           <div class="andar-info">
             <div class="andar-subtitle">1º Andar · Fundo do Mar</div>
@@ -1379,8 +1377,6 @@
           <div class="andar-photo-placeholder" style="position:relative;overflow:hidden;">
             <img class="tema-img" src="assets/images/tema-safari.jpg" alt="Safari">
             <div class="color-overlay"></div>
-            <span class="placeholder-emoji">🌿</span>
-            <span class="placeholder-label">2º Andar — Safari</span>
           </div>
           <div class="andar-info">
             <div class="andar-subtitle">2º Andar · Safari</div>
@@ -1402,8 +1398,6 @@
           <div class="andar-photo-placeholder" style="position:relative;overflow:hidden;">
             <img class="tema-img" src="assets/images/tema-galaxia.jpg" alt="Galáxia">
             <div class="color-overlay"></div>
-            <span class="placeholder-emoji">🪐</span>
-            <span class="placeholder-label">3º Andar — Galáxia</span>
           </div>
           <div class="andar-info">
             <div class="andar-subtitle">3º Andar · Galáxia</div>
@@ -1710,59 +1704,54 @@
       }
     });
 
-    // --- Slider: Áreas de Atuação ---
     // --- Carrossel Infinito: Áreas de Atuação ---
-    (function() {
+    window.addEventListener('load', function() {
       const track = document.getElementById('areasTrack');
       if (!track) return;
 
-      // Duplica os cards para criar loop infinito
       const originalCards = Array.from(track.children);
-      originalCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        track.appendChild(clone);
+      // Duplica 2x para garantir loop contínuo
+      [...originalCards, ...originalCards].forEach(card => {
+        track.appendChild(card.cloneNode(true));
       });
 
       const GAP = 20;
       let offset = 0;
       let paused = false;
-      const SPEED = 0.6; // pixels por frame
+      const SPEED = 0.5;
 
-      function getCardWidth() {
-        return track.children[0].offsetWidth + GAP;
+      function cardWidth() {
+        return track.children[0].getBoundingClientRect().width + GAP;
       }
 
-      function animate() {
+      function totalWidth() {
+        return cardWidth() * originalCards.length;
+      }
+
+      function step() {
         if (!paused) {
           offset += SPEED;
-          const totalWidth = getCardWidth() * originalCards.length;
-          if (offset >= totalWidth) {
-            offset -= totalWidth;
-          }
+          if (offset >= totalWidth()) offset -= totalWidth();
           track.style.transform = `translateX(-${offset}px)`;
         }
-        requestAnimationFrame(animate);
+        requestAnimationFrame(step);
       }
 
-      // Pausa ao passar o mouse
+      track.style.transition = 'none';
       track.addEventListener('mouseenter', () => paused = true);
       track.addEventListener('mouseleave', () => paused = false);
 
-      // Botões de navegação manual
       window.slideAreas = function(dir) {
         paused = true;
-        offset += dir * (getCardWidth() * 2);
-        const totalWidth = getCardWidth() * originalCards.length;
-        if (offset < 0) offset += totalWidth;
-        if (offset >= totalWidth) offset -= totalWidth;
+        offset += dir * cardWidth() * 2;
+        if (offset < 0) offset += totalWidth();
+        if (offset >= totalWidth()) offset -= totalWidth();
         track.style.transform = `translateX(-${offset}px)`;
-        setTimeout(() => paused = false, 2000);
+        setTimeout(() => { paused = false; }, 2000);
       };
 
-      // Remove transition para scroll suave
-      track.style.transition = 'none';
-      animate();
-    })();
+      requestAnimationFrame(step);
+    });
 
     // --- Slider: Atendimento ---
     let atendIdx = 0;
