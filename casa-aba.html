@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa ABA – HD360 | Mont'Serrat, Porto Alegre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: #faf9f6; color: #2d2d2d; overflow-x: hidden; }
+    :root {
+      --safari-light: #d8edbc; --safari-mid: #8db84a; --safari-deep: #5a7a2e; --safari-text: #2d4a10;
+      --ocean-light: #ddeef8; --ocean-mid: #7aafd4;
+      --cream: #faf9f6; --gray-1: #f4f3ef; --gray-2: #e8e6e0; --gray-3: #b0ada4; --gray-4: #6b6860; --dark: #1e1e1e;
+      --font-display: 'Fraunces', Georgia, serif;
+      --radius-sm: 12px; --radius-md: 20px; --radius-lg: 32px;
+    }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250,249,246,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-2); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; display: block; object-fit: contain; }
+    .nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--gray-4); text-decoration: none; padding: 7px 14px; border-radius: 8px; border: 1.5px solid var(--gray-2); background: white; transition: all 0.2s; }
+    .nav-back:hover { color: var(--dark); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .btn-whats-nav { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: white; background: #25d366; padding: 8px 16px; border-radius: 8px; text-decoration: none; }
+    .btn-agendar-nav { font-size: 12px; font-weight: 700; color: white; background: var(--safari-deep); padding: 8px 16px; border-radius: 8px; text-decoration: none; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: #2d4a10; }
+    .hero-bg-img { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.15; }
+    .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(45,74,16,0.92) 50%, rgba(45,74,16,0.45) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 120px 5% 80px; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 6px 16px; margin-bottom: 28px; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #8db84a; }
+    .hero-badge span { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; color: white; margin-bottom: 20px; max-width: 640px; }
+    .hero-title strong { font-weight: 600; display: block; }
+    .hero-title em { font-style: italic; color: #b8e08a; }
+    .hero-sub { font-size: clamp(15px, 1.6vw, 18px); color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 520px; margin-bottom: 36px; }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+    .btn-hero-primary { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--safari-text); font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 12px; text-decoration: none; transition: all 0.2s; }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-hero-location { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); color: white; font-weight: 600; font-size: 14px; padding: 13px 22px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.3); text-decoration: none; transition: all 0.2s; }
+    .btn-hero-location:hover { background: rgba(255,255,255,0.2); }
+    .hero-address { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.45); font-size: 13px; }
+
+    /* SOBRE */
+    #sobre { padding: 100px 5%; background: var(--cream); position: relative; overflow: hidden; }
+    .sobre-bg { position: absolute; inset: 0; z-index: 0; }
+    .sobre-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.06; }
+    .sobre-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .sobre-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; background: var(--safari-light); color: var(--safari-text); }
+    .sobre-title { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px); font-weight: 400; line-height: 1.2; color: var(--dark); margin-bottom: 20px; }
+    .sobre-title em { font-style: italic; font-weight: 300; color: var(--safari-deep); }
+    .sobre-text { font-size: 16px; color: var(--gray-4); line-height: 1.8; margin-bottom: 20px; }
+    .sobre-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+    .sobre-stat { background: white; border-radius: var(--radius-sm); padding: 20px; border: 1px solid var(--gray-2); text-align: center; }
+    .sobre-stat .num { font-family: var(--font-display); font-size: 32px; font-weight: 600; color: var(--safari-deep); line-height: 1; }
+    .sobre-stat .lbl { font-size: 12px; color: var(--gray-4); margin-top: 4px; }
+    .sobre-visual { border-radius: var(--radius-lg); height: 420px; overflow: hidden; }
+    .sobre-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* COVERFLOW */
+    #galeria { padding: 100px 0; background: #1a2a0a; overflow: hidden; }
+    .galeria-header { text-align: center; margin-bottom: 56px; padding: 0 5%; }
+    .galeria-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; background: rgba(141,184,74,0.2); color: #8db84a; }
+    .galeria-title { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 300; color: white; line-height: 1.2; }
+    .galeria-title em { font-style: italic; color: #b8e08a; }
+    .coverflow-wrap { position: relative; width: 100%; height: 500px; display: flex; align-items: center; justify-content: center; perspective: 1400px; }
+    .coverflow-track { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+    .cf-slide { position: absolute; top: 50%; left: 50%; width: 280px; height: 400px; transform-origin: center center; transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: pointer; border-radius: 16px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.6); }
+    .cf-slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .coverflow-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 40px; }
+    .cf-btn { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+    .cf-btn:hover { background: rgba(255,255,255,0.18); }
+    .cf-btn svg { width: 20px; height: 20px; stroke: white; fill: none; stroke-width: 2; }
+    .cf-dots { display: flex; gap: 8px; align-items: center; }
+    .cf-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); transition: all 0.3s; cursor: pointer; }
+    .cf-dot.active { background: #8db84a; width: 24px; border-radius: 4px; }
+
+    /* ESTRUTURA */
+    #estrutura { padding: 100px 5%; background: var(--cream); }
+    .estrutura-inner { max-width: 1200px; margin: 0 auto; }
+    .estrutura-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; background: var(--safari-light); color: var(--safari-text); }
+    .estrutura-title { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: var(--dark); line-height: 1.2; margin-bottom: 12px; }
+    .estrutura-title em { font-style: italic; font-weight: 300; }
+    .estrutura-sub { font-size: 16px; color: var(--gray-4); line-height: 1.7; margin-bottom: 48px; max-width: 560px; }
+    .estrutura-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .estrutura-card { background: white; border-radius: var(--radius-md); padding: 28px 24px; border: 1px solid var(--gray-2); transition: all 0.3s; position: relative; overflow: hidden; }
+    .estrutura-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--safari-mid); }
+    .estrutura-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(90,122,46,0.12); }
+    .estrutura-icon { font-size: 28px; margin-bottom: 14px; }
+    .estrutura-card h3 { font-size: 15px; font-weight: 700; color: var(--safari-text); margin-bottom: 8px; }
+    .estrutura-card p { font-size: 13px; color: var(--gray-4); line-height: 1.6; }
+
+    /* LOCALIZAÇÃO */
+    #localizacao { padding: 100px 5%; background: var(--safari-light); position: relative; overflow: hidden; }
+    .loc-bg { position: absolute; inset: 0; z-index: 0; }
+    .loc-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.07; }
+    .loc-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .loc-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; background: white; color: var(--safari-text); }
+    .loc-title { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: var(--safari-text); line-height: 1.2; margin-bottom: 24px; }
+    .loc-title em { font-style: italic; font-weight: 300; }
+    .loc-address-card { background: white; border-radius: var(--radius-md); padding: 28px; border: 1px solid rgba(141,184,74,0.3); margin-bottom: 24px; }
+    .loc-address-card h4 { font-size: 11px; font-weight: 700; color: var(--gray-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .loc-address-card p { font-size: 16px; font-weight: 600; color: var(--safari-text); line-height: 1.6; }
+    .loc-horario { font-size: 13px; color: var(--safari-deep); margin-top: 8px; font-weight: 600; }
+    .btn-mapa { display: inline-flex; align-items: center; gap: 8px; background: var(--safari-deep); color: white; font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 12px; text-decoration: none; transition: all 0.2s; }
+    .btn-mapa:hover { background: var(--safari-text); transform: translateY(-2px); }
+    .loc-map { border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 20px 48px rgba(90,122,46,0.2); height: 380px; border: 3px solid white; }
+    .loc-map iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* CTA */
+    #cta { padding: 100px 5%; background: linear-gradient(135deg, #2d4a10 0%, #3d6a1a 50%, #5a7a2e 100%); text-align: center; }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 24px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
+    .cta-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 46px); font-weight: 300; color: white; line-height: 1.2; margin-bottom: 16px; }
+    .cta-title em { font-style: italic; color: #b8e08a; }
+    .cta-sub { font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 40px; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-main { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--safari-text); font-weight: 700; font-size: 15px; padding: 16px 30px; border-radius: 12px; text-decoration: none; transition: all 0.2s; }
+    .btn-cta-main:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+    .btn-cta-whats { display: inline-flex; align-items: center; gap: 8px; background: #25d366; color: white; font-weight: 700; font-size: 15px; padding: 16px 28px; border-radius: 12px; text-decoration: none; transition: all 0.2s; }
+    .btn-cta-whats:hover { background: #1fb058; }
+
+    /* RODAPÉ */
+    footer { background: #111; padding: 32px 5%; text-align: center; }
+    .footer-logo { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .footer-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { margin-top: 20px; font-size: 11px; color: rgba(255,255,255,0.2); }
+
+    /* WHATSAPP */
+    .whatsapp-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 56px; height: 56px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: all 0.3s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sobre-grid, .loc-grid { grid-template-columns: 1fr; gap: 40px; }
+      .estrutura-grid { grid-template-columns: repeat(2, 1fr); }
+      .sobre-visual { height: 260px; }
+      .cf-slide { width: 200px; height: 300px; }
+      .coverflow-wrap { height: 360px; }
+    }
+    @media (max-width: 600px) {
+      .estrutura-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo-hd360.png" alt="HD360" class="nav-logo-img">
+      </a>
+      <a href="index.html" class="nav-back">← Voltar ao site</a>
+      <div class="nav-actions">
+        <a href="https://wa.me/5551900000000" class="btn-whats-nav" target="_blank">WhatsApp</a>
+        <a href="#cta" class="btn-agendar-nav">Agendar avaliação</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg-img">
+      <img src="assets/images/casa-aba/foto-01.jpg" alt="Casa ABA">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>Mont'Serrat · Porto Alegre, RS</span>
+      </div>
+      <h1 class="hero-title">
+        Um espaço pensado para<br>
+        <strong>evolução real,</strong>
+        <em>todos os dias.</em>
+      </h1>
+      <p class="hero-sub">A Casa ABA foi planejada para oferecer um ambiente terapêutico acolhedor, funcional e altamente estruturado — com espaços que favorecem o desenvolvimento e a autonomia.</p>
+      <div class="hero-buttons">
+        <a href="#cta" class="btn-hero-primary">📋 Agendar avaliação</a>
+        <a href="https://maps.google.com/?q=R.+Dr.+Freire+Alemão,+366,+Mont'Serrat,+Porto+Alegre,+RS" target="_blank" class="btn-hero-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ver no mapa
+        </a>
+      </div>
+      <div class="hero-address">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        R. Dr. Freire Alemão, 366 — Mont'Serrat, Porto Alegre - RS · CEP 90450-060
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="sobre-bg"><img src="assets/images/tema-safari.jpg" alt=""></div>
+    <div class="sobre-inner">
+      <div class="sobre-grid">
+        <div>
+          <span class="sobre-tag">Sobre a Casa ABA</span>
+          <h2 class="sobre-title">Um ambiente <em>feito para evoluir</em></h2>
+          <p class="sobre-text">A Casa ABA é uma extensão da unidade Quintino — com a mesma excelência HD360, em um espaço totalmente planejado para oferecer terapias estruturadas, autonomia e generalização de habilidades dentro e fora da clínica.</p>
+          <p class="sobre-text">Cada detalhe foi pensado para que a criança se sinta segura, estimulada e acolhida — e para que a família tenha um espaço de conforto e apoio durante os atendimentos.</p>
+          <div class="sobre-stats">
+            <div class="sobre-stat"><div class="num">10</div><div class="lbl">salas individuais</div></div>
+            <div class="sobre-stat"><div class="num">2</div><div class="lbl">salas de vivências</div></div>
+            <div class="sobre-stat"><div class="num">100%</div><div class="lbl">acessível</div></div>
+          </div>
+        </div>
+        <div class="sobre-visual">
+          <img src="assets/images/casa-aba/foto-03.jpg" alt="Casa ABA estrutura">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="galeria-header">
+      <span class="galeria-tag">Estrutura em imagens</span>
+      <h2 class="galeria-title">Conheça cada cantinho<br><em>da Casa ABA</em></h2>
+    </div>
+    <div class="coverflow-wrap" id="cfWrap">
+      <div class="coverflow-track" id="cfTrack"></div>
+    </div>
+    <div class="coverflow-nav">
+      <button class="cf-btn" onclick="cfMove(-1)">
+        <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <div class="cf-dots" id="cfDots"></div>
+      <button class="cf-btn" onclick="cfMove(1)">
+        <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section id="estrutura">
+    <div class="estrutura-inner">
+      <span class="estrutura-tag">Espaços e ambientes</span>
+      <h2 class="estrutura-title">Cada sala com um<br><em>propósito terapêutico</em></h2>
+      <p class="estrutura-sub">Ambientes planejados para o desenvolvimento real, dia após dia.</p>
+      <div class="estrutura-grid">
+        <div class="estrutura-card"><div class="estrutura-icon">🛋️</div><h3>10 Salas de Atendimento Individual</h3><p>Ambientes privativos e confortáveis para terapias e acompanhamentos multidisciplinares.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">🏠</div><h3>2 Salas de Vivências por Faixa Etária</h3><p>Treino de autonomia e rotina com atividades práticas do dia a dia — AVDs e AIDs.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">🤸</div><h3>Sala de Integração Sensorial</h3><p>Método Ayres com recursos para regulação sensorial, equilíbrio e estímulos direcionados.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">💪</div><h3>Fisioterapia e Psicomotricidade</h3><p>Foco em desenvolvimento motor, coordenação e mobilidade.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">🍽️</div><h3>Cozinha Terapêutica</h3><p>Apoio para seletividade alimentar e habilidades funcionais na alimentação.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">⚽</div><h3>Quadra Externa Ampla</h3><p>Atividades motoras, brincadeiras orientadas e socialização ao ar livre.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">🌱</div><h3>Horta e Jardins Integrados</h3><p>Vivências sensoriais e aprendizado com contato com a natureza.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">💼</div><h3>Coworking para Responsáveis</h3><p>Mesas, tomadas, wi-fi e conforto durante os atendimentos.</p></div>
+        <div class="estrutura-card"><div class="estrutura-icon">♿</div><h3>Acessibilidade Total</h3><p>Estrutura adaptada e circulação facilitada para todos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="localizacao">
+    <div class="loc-bg"><img src="assets/images/tema-safari.jpg" alt=""></div>
+    <div class="loc-inner">
+      <div class="loc-grid">
+        <div>
+          <span class="loc-tag">Como chegar</span>
+          <h2 class="loc-title">Estamos em<br><em>Mont'Serrat</em></h2>
+          <div class="loc-address-card">
+            <h4>Endereço</h4>
+            <p>R. Dr. Freire Alemão, 366<br>Mont'Serrat · Porto Alegre - RS<br>CEP 90450-060</p>
+            <p class="loc-horario">Segunda a sexta · 08h às 18h</p>
+          </div>
+          <a href="https://maps.google.com/?q=R.+Dr.+Freire+Alemão,+366,+Mont'Serrat,+Porto+Alegre,+RS,+90450-060" target="_blank" class="btn-mapa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Abrir no Google Maps
+          </a>
+        </div>
+        <div class="loc-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.12!2d-51.19816!3d-30.02783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951979ae4a1a0bed%3A0x8e5c2d2e7a1a2b3c!2sR.+Dr.+Freire+Alemão%2C+366+-+Mont'Serrat%2C+Porto+Alegre+-+RS%2C+90450-060!5e0!3m2!1spt-BR!2sbr!4v1234567890!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="cta-inner">
+      <span class="cta-tag">Próximo passo</span>
+      <h2 class="cta-title">Venha conhecer a<br><em>Casa ABA pessoalmente</em></h2>
+      <p class="cta-sub">Nossa equipe está pronta para receber você e sua família, mostrar cada espaço e criar o melhor plano para o seu filho.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-cta-main">📋 Agendar avaliação</a>
+        <a href="https://wa.me/5551900000000" class="btn-cta-whats" target="_blank">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">HD360 · Casa ABA</div>
+    <p class="footer-sub">R. Dr. Freire Alemão, 366 — Mont'Serrat, Porto Alegre - RS</p>
+    <div class="footer-links">
+      <a href="index.html">← Site principal</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#localizacao">Localização</a>
+    </div>
+    <div class="footer-bottom">© 2025 HD360 · Todos os direitos reservados</div>
+  </footer>
+
+  <a href="https://wa.me/5551900000000" class="whatsapp-float" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+    });
+
+    // Coverflow
+    const photos = Array.from({length: 12}, (_, i) => 'assets/images/casa-aba/foto-' + String(i+1).padStart(2,'0') + '.jpg');
+    let current = 0;
+    const track = document.getElementById('cfTrack');
+    const dotsEl = document.getElementById('cfDots');
+
+    photos.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'cf-slide';
+      slide.innerHTML = '<img src="' + src + '" alt="Casa ABA foto ' + (i+1) + '">';
+      slide.addEventListener('click', () => cfGoTo(i));
+      track.appendChild(slide);
+    });
+
+    photos.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'cf-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => cfGoTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function cfGoTo(idx) {
+      current = ((idx % photos.length) + photos.length) % photos.length;
+      updateCoverflow();
+    }
+    function cfMove(dir) { cfGoTo(current + dir); }
+
+    function updateCoverflow() {
+      const slides = track.querySelectorAll('.cf-slide');
+      const dots = dotsEl.querySelectorAll('.cf-dot');
+      const W = 310;
+
+      slides.forEach((slide, i) => {
+        const offset = i - current;
+        const abs = Math.abs(offset);
+        if (abs > 3) { slide.style.opacity = '0'; slide.style.zIndex = '0'; return; }
+        const x = offset * W;
+        const ry = offset * -38;
+        const scale = abs === 0 ? 1 : abs === 1 ? 0.8 : abs === 2 ? 0.62 : 0.47;
+        const blur = abs === 0 ? 0 : abs === 1 ? 4 : abs === 2 ? 8 : 12;
+        const opacity = abs === 0 ? 1 : abs === 1 ? 0.7 : abs === 2 ? 0.45 : 0.25;
+        slide.style.cssText += ';transform:translate(calc(-50% + ' + x + 'px), -50%) rotateY(' + ry + 'deg) scale(' + scale + ');filter:blur(' + blur + 'px);opacity:' + opacity + ';z-index:' + (100 - abs * 10) + ';';
+      });
+
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    }
+
+    let auto = setInterval(() => cfMove(1), 3500);
+    const wrap = document.getElementById('cfWrap');
+    wrap.addEventListener('mouseenter', () => clearInterval(auto));
+    wrap.addEventListener('mouseleave', () => { auto = setInterval(() => cfMove(1), 3500); });
+
+    let tx = 0;
+    wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].clientX; if (Math.abs(d) > 40) cfMove(d > 0 ? 1 : -1); }, { passive: true });
+
+    updateCoverflow();
+  </script>
+</body>
+</html>
