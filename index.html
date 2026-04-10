@@ -1142,14 +1142,6 @@
           <h2 class="section-title">Encontre o cuidado<br><em>certo para o seu filho</em></h2>
           <p class="section-sub">Nossa equipe multidisciplinar oferece terapias com práticas baseadas em evidências científicas.</p>
         </div>
-        <div class="areas-nav">
-          <button class="slider-btn" onclick="slideAreas(-1)">
-            <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
-          </button>
-          <button class="slider-btn" onclick="slideAreas(1)">
-            <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
-          </button>
-        </div>
       </div>
     </div>
     <div class="areas-track-wrap">
@@ -1705,53 +1697,50 @@
     });
 
     // --- Carrossel Infinito: Áreas de Atuação ---
-    window.addEventListener('load', function() {
+    (function() {
       const track = document.getElementById('areasTrack');
       if (!track) return;
-
-      const originalCards = Array.from(track.children);
-      // Duplica 2x para garantir loop contínuo
-      [...originalCards, ...originalCards].forEach(card => {
-        track.appendChild(card.cloneNode(true));
-      });
-
-      const GAP = 20;
+      const originals = Array.from(track.children);
+      originals.forEach(c => track.appendChild(c.cloneNode(true)));
+      originals.forEach(c => track.appendChild(c.cloneNode(true)));
       let offset = 0;
-      let paused = false;
-      const SPEED = 0.5;
-
-      function cardWidth() {
-        return track.children[0].getBoundingClientRect().width + GAP;
-      }
-
-      function totalWidth() {
-        return cardWidth() * originalCards.length;
-      }
-
-      function step() {
-        if (!paused) {
+      let dragging = false;
+      let startX = 0;
+      let startOffset = 0;
+      const SPEED = 0.6;
+      function cw() { const c = track.children[0]; return c ? c.offsetWidth + 20 : 300; }
+      function total() { return cw() * originals.length; }
+      function loop() {
+        if (!dragging) {
           offset += SPEED;
-          if (offset >= totalWidth()) offset -= totalWidth();
-          track.style.transform = `translateX(-${offset}px)`;
+          if (offset >= total()) offset -= total();
+          track.style.transform = 'translateX(-' + offset + 'px)';
         }
-        requestAnimationFrame(step);
+        requestAnimationFrame(loop);
       }
-
+      track.addEventListener('mousedown', e => { dragging = true; startX = e.clientX; startOffset = offset; track.style.cursor = 'grabbing'; });
+      window.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        offset = startOffset + (startX - e.clientX);
+        if (offset < 0) offset += total();
+        if (offset >= total()) offset -= total();
+        track.style.transform = 'translateX(-' + offset + 'px)';
+      });
+      window.addEventListener('mouseup', () => { dragging = false; track.style.cursor = 'grab'; });
+      track.addEventListener('touchstart', e => { dragging = true; startX = e.touches[0].clientX; startOffset = offset; }, { passive: true });
+      track.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        offset = startOffset + (startX - e.touches[0].clientX);
+        if (offset < 0) offset += total();
+        if (offset >= total()) offset -= total();
+        track.style.transform = 'translateX(-' + offset + 'px)';
+      }, { passive: true });
+      track.addEventListener('touchend', () => { dragging = false; });
+      track.style.cursor = 'grab';
       track.style.transition = 'none';
-      track.addEventListener('mouseenter', () => paused = true);
-      track.addEventListener('mouseleave', () => paused = false);
-
-      window.slideAreas = function(dir) {
-        paused = true;
-        offset += dir * cardWidth() * 2;
-        if (offset < 0) offset += totalWidth();
-        if (offset >= totalWidth()) offset -= totalWidth();
-        track.style.transform = `translateX(-${offset}px)`;
-        setTimeout(() => { paused = false; }, 2000);
-      };
-
-      requestAnimationFrame(step);
-    });
+      track.style.userSelect = 'none';
+      requestAnimationFrame(loop);
+    })();
 
     // --- Slider: Atendimento ---
     let atendIdx = 0;
@@ -1777,8 +1766,13 @@
 
     // --- Tabs dos andares ---
     function showAndar(theme, btn) {
-      // Esconder todos os painéis
       document.querySelectorAll('.andar-panel').forEach(p => p.classList.remove('active'));
-      // Remover classe ativa dos botões
       document.querySelectorAll('.andar-tab').forEach(b => {
-        b.classList.remove('activ
+        b.classList.remove('active-ocean', 'active-safari', 'active-space');
+      });
+      document.getElementById('panel-' + theme).classList.add('active');
+      btn.classList.add('active-' + theme);
+    }
+  </script>
+</body>
+</html>
