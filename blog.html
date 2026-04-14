@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog & Novidades – HD360 | Porto Alegre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: #faf9f6; color: #2d2d2d; overflow-x: hidden; }
+    :root {
+      --ocean-light: #ddeef8; --ocean-mid: #7aafd4; --ocean-deep: #4a85b8; --ocean-text: #1a4a6e;
+      --safari-light: #d8edbc; --safari-mid: #8db84a; --safari-deep: #5a7a2e; --safari-text: #2d4a10;
+      --space-light: #ddd5f0; --space-mid: #8b6fbe; --space-deep: #5c3d8f; --space-text: #2a1654;
+      --cream: #faf9f6; --gray-1: #f4f3ef; --gray-2: #e8e6e0; --gray-3: #b0ada4; --gray-4: #6b6860; --dark: #1e1e1e;
+      --font-display: 'Fraunces', Georgia, serif;
+      --radius-sm: 12px; --radius-md: 20px; --radius-lg: 32px;
+    }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250,249,246,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-2); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; display: block; object-fit: contain; }
+    .nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--gray-4); text-decoration: none; padding: 7px 14px; border-radius: 8px; border: 1.5px solid var(--gray-2); background: white; transition: all 0.2s; }
+    .nav-back:hover { color: var(--dark); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .btn-agendar-nav { font-size: 12px; font-weight: 700; color: white; background: var(--ocean-deep); padding: 8px 16px; border-radius: 8px; text-decoration: none; }
+
+    /* HERO BLOG */
+    #hero {
+      padding: 140px 5% 80px;
+      background: linear-gradient(135deg, var(--ocean-text) 0%, #2d5a8e 60%, var(--space-deep) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; }
+    .hero-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.2); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px); font-weight: 300; color: white; line-height: 1.15; margin-bottom: 16px; }
+    .hero-title em { font-style: italic; color: #b8d8f0; }
+    .hero-sub { font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 500px; }
+
+    /* FILTROS */
+    #filtros { background: white; border-bottom: 1px solid var(--gray-2); position: sticky; top: 64px; z-index: 100; }
+    .filtros-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: flex; align-items: center; gap: 8px; height: 56px; overflow-x: auto; }
+    .filtro-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;
+      border: 1.5px solid var(--gray-2); background: white; color: var(--gray-4);
+      cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+    }
+    .filtro-btn:hover { border-color: var(--ocean-mid); color: var(--ocean-text); }
+    .filtro-btn.active { background: var(--ocean-deep); border-color: var(--ocean-deep); color: white; }
+    .filtro-btn.active-programacoes { background: var(--safari-deep); border-color: var(--safari-deep); color: white; }
+    .filtro-btn.active-novidades { background: var(--space-deep); border-color: var(--space-deep); color: white; }
+
+    /* DESTAQUE + CALENDÁRIO */
+    #conteudo { padding: 64px 5%; max-width: 1200px; margin: 0 auto; }
+    .conteudo-grid { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
+
+    /* POSTS */
+    .posts-section h2 { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 28px; }
+    .posts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .post-card {
+      background: white; border-radius: var(--radius-md); overflow: hidden;
+      border: 1px solid var(--gray-2); transition: all 0.3s; cursor: pointer;
+    }
+    .post-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+    .post-img { height: 200px; overflow: hidden; position: relative; }
+    .post-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .post-card:hover .post-img img { transform: scale(1.04); }
+    .post-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+    .post-cat {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .cat-conteudo { background: var(--ocean-light); color: var(--ocean-text); }
+    .cat-programacoes { background: var(--safari-light); color: var(--safari-text); }
+    .cat-novidades { background: var(--space-light); color: var(--space-text); }
+    .post-body { padding: 20px; }
+    .post-date { font-size: 11px; color: var(--gray-3); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .post-title { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--dark); line-height: 1.3; margin-bottom: 10px; }
+    .post-excerpt { font-size: 13px; color: var(--gray-4); line-height: 1.6; margin-bottom: 16px; }
+    .post-link { font-size: 13px; font-weight: 700; color: var(--ocean-deep); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    .post-link:hover { color: var(--ocean-text); }
+
+    /* SIDEBAR — CALENDÁRIO */
+    .sidebar { position: sticky; top: 136px; }
+    .sidebar-card { background: white; border-radius: var(--radius-md); border: 1px solid var(--gray-2); overflow: hidden; margin-bottom: 24px; }
+    .sidebar-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--gray-2); }
+    .sidebar-header h3 { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--dark); }
+    .sidebar-header p { font-size: 13px; color: var(--gray-3); margin-top: 4px; }
+
+    /* CALENDÁRIO */
+    .cal-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+    .cal-month { font-size: 15px; font-weight: 700; color: var(--dark); }
+    .cal-btn { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--gray-2); background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .cal-btn:hover { background: var(--ocean-light); border-color: var(--ocean-mid); }
+    .cal-btn svg { width: 14px; height: 14px; stroke: var(--gray-4); fill: none; stroke-width: 2; }
+    .cal-grid { padding: 0 16px 16px; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 4px; }
+    .cal-wd { text-align: center; font-size: 10px; font-weight: 700; color: var(--gray-3); text-transform: uppercase; padding: 4px 0; }
+    .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: var(--gray-4);
+      border-radius: 8px; cursor: pointer; transition: all 0.15s; position: relative;
+    }
+    .cal-day:hover { background: var(--gray-1); }
+    .cal-day.other-month { color: var(--gray-2); cursor: default; }
+    .cal-day.today { background: var(--ocean-deep); color: white; }
+    .cal-day.has-event::after { content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--safari-mid); }
+    .cal-day.today.has-event::after { background: white; }
+    .cal-day.selected { background: var(--ocean-light); color: var(--ocean-text); border: 1.5px solid var(--ocean-mid); }
+
+    /* EVENTOS DO DIA */
+    .eventos-list { padding: 0 24px 20px; }
+    .evento-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--gray-1); }
+    .evento-item:last-child { border-bottom: none; }
+    .evento-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .evento-info h4 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+    .evento-info span { font-size: 11px; color: var(--gray-3); }
+    .no-eventos { padding: 16px 24px; font-size: 13px; color: var(--gray-3); text-align: center; }
+
+    /* NEWSLETTER */
+    .newsletter-card { background: linear-gradient(135deg, var(--ocean-text), var(--space-deep)); border-radius: var(--radius-md); padding: 28px 24px; color: white; }
+    .newsletter-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 400; margin-bottom: 8px; }
+    .newsletter-card p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; line-height: 1.6; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-input { padding: 11px 14px; border-radius: 8px; border: none; font-size: 14px; font-family: 'Nunito', sans-serif; width: 100%; }
+    .newsletter-btn { padding: 11px; border-radius: 8px; border: none; background: var(--safari-mid); color: white; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.2s; }
+    .newsletter-btn:hover { background: var(--safari-deep); }
+
+    /* WHATSAPP */
+    .whatsapp-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 56px; height: 56px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: all 0.3s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* RODAPÉ */
+    footer { background: #111; padding: 28px 5%; text-align: center; margin-top: 80px; }
+    .footer-logo { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+    .post-card.hidden { display: none; }
+
+    @media (max-width: 1024px) { .conteudo-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
+    @media (max-width: 640px) { .posts-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo-hd360.png" alt="HD360" class="nav-logo-img">
+      </a>
+      <a href="index.html" class="nav-back">← Voltar ao site</a>
+      <div class="nav-actions">
+        <a href="https://wa.me/555121128884" class="btn-agendar-nav">Agendar avaliação</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">HD360 · Conteúdo & Novidades</span>
+      <h1 class="hero-title">Informação que<br><em>transforma famílias</em></h1>
+      <p class="hero-sub">Artigos, programações e novidades da clínica — para você acompanhar tudo que acontece na HD360.</p>
+    </div>
+  </section>
+
+  <div id="filtros">
+    <div class="filtros-inner">
+      <button class="filtro-btn active" onclick="filtrar('todos', this)">Tudo</button>
+      <button class="filtro-btn" onclick="filtrar('conteudo', this)">📰 Conteúdo</button>
+      <button class="filtro-btn" onclick="filtrar('programacoes', this)">📅 Programações</button>
+      <button class="filtro-btn" onclick="filtrar('novidades', this)">✨ Novidades</button>
+    </div>
+  </div>
+
+  <div id="conteudo">
+    <div class="conteudo-grid">
+
+      <!-- POSTS -->
+      <div class="posts-section">
+        <h2>Publicações recentes</h2>
+        <div class="posts-grid" id="postsGrid">
+
+          <div class="post-card" data-cat="conteudo">
+            <div class="post-img" style="background: var(--ocean-light);">
+              <div class="post-img-placeholder">🧩</div>
+              <span class="post-cat cat-conteudo">Conteúdo</span>
+            </div>
+            <div class="post-body">
+              <div class="post-date">5 de abril de 2025</div>
+              <h3 class="post-title">Perguntas frequentes sobre autismo — dúvidas mais buscadas pelas famílias</h3>
+              <p class="post-excerpt">Nos últimos anos, a busca por informações sobre autismo em Porto Alegre cresceu significativamente. Pais, cuidadores e profissionais procuram compreender melhor os sinais e o diagnóstico.</p>
+              <a href="#" class="post-link">Ler artigo →</a>
+            </div>
+          </div>
+
+          <div class="post-card" data-cat="conteudo">
+            <div class="post-img" style="background: var(--safari-light);">
+              <div class="post-img-placeholder">👨‍👩‍👧</div>
+              <span class="post-cat cat-conteudo">Conteúdo</span>
+            </div>
+            <div class="post-body">
+              <div class="post-date">1 de abril de 2025</div>
+              <h3 class="post-title">O papel essencial da família na evolução da criança com TEA</h3>
+              <p class="post-excerpt">Quando uma família começa a suspeitar que algo diferente está acontecendo no desenvolvimento do seu filho, é como se um mundo inteiro se abrisse.</p>
+              <a href="#" class="post-link">Ler artigo →</a>
+            </div>
+          </div>
+
+          <div class="post-card" data-cat="programacoes">
+            <div class="post-img" style="background: var(--safari-light);">
+              <div class="post-img-placeholder">🧺</div>
+              <span class="post-cat cat-programacoes">Programações</span>
+            </div>
+            <div class="post-body">
+              <div class="post-date">20 de abril de 2025</div>
+              <h3 class="post-title">Dia do Piquenique HD360 — venha celebrar com a gente!</h3>
+              <p class="post-excerpt">Um dia especial ao ar livre para as crianças, famílias e equipe da HD360. Atividades lúdicas, música e muito carinho — não perca!</p>
+              <a href="#" class="post-link">Ver detalhes →</a>
+            </div>
+          </div>
+
+          <div class="post-card" data-cat="programacoes">
+            <div class="post-img" style="background: var(--space-light);">
+              <div class="post-img-placeholder">🎵</div>
+              <span class="post-cat cat-programacoes">Programações</span>
+            </div>
+            <div class="post-body">
+              <div class="post-date">28 de abril de 2025</div>
+              <h3 class="post-title">Dia da Música — apresentação especial das turmas de musicoterapia</h3>
+              <p class="post-excerpt">Celebrando o Dia Mundial da Música com uma apresentação especial das nossas turmas. Família e amigos estão convidados!</p>
+              <a href="#" class="post-link">Ver detalhes →</a>
+            </div>
+          </div>
+
+          <div class="post-card" data-cat="novidades">
+            <div class="post-img" style="background: var(--ocean-light);">
+              <div class="post-img-placeholder">🏆</div>
+              <span class="post-cat cat-novidades">Novidades</span>
+            </div>
+            <div class="post-body">
+              <div class="post-date">15 de março de 2025</div>
+              <h3 class="post-title">Copa do Mundo HD360 — torneio de futebol adaptado para nossos pacientes</h3>
+              <p class="post-excerpt">Uma manhã de esporte, inclusão e muita alegria! A Copa do Mundo HD360 reúne crianças de todas as turmas em um torneio adaptado e cheio de emoção.</p>
+              <a href="#" class="post-link">Ver detalhes →</a>
+            </div>
+          </div>
+
+          <div class="post-card" data-cat="novidades">
+            <div class="post-img" style="background: var(--space-light);">
+              <div class="post-img-placeholder">✨</div>
+              <span class="post-cat cat-novidades">Novidades</span>
+            </div>
+            <div class="post-body">
+              <div class="post-date">10 de março de 2025</div>
+              <h3 class="post-title">Nova sala de integração sensorial inaugurada na unidade Quintino</h3>
+              <p class="post-excerpt">Estamos felizes em anunciar a inauguração da nossa nova sala de integração sensorial, equipada com os mais modernos recursos do Método Ayres.</p>
+              <a href="#" class="post-link">Ler mais →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <!-- CALENDÁRIO -->
+        <div class="sidebar-card">
+          <div class="sidebar-header">
+            <h3>📅 Calendário de eventos</h3>
+            <p>Próximas atividades da HD360</p>
+          </div>
+          <div class="cal-nav">
+            <button class="cal-btn" onclick="calNav(-1)">
+              <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+            </button>
+            <span class="cal-month" id="calMonth"></span>
+            <button class="cal-btn" onclick="calNav(1)">
+              <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+            </button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-weekdays">
+              <div class="cal-wd">Dom</div><div class="cal-wd">Seg</div><div class="cal-wd">Ter</div>
+              <div class="cal-wd">Qua</div><div class="cal-wd">Qui</div><div class="cal-wd">Sex</div><div class="cal-wd">Sáb</div>
+            </div>
+            <div class="cal-days" id="calDays"></div>
+          </div>
+          <div class="eventos-list" id="eventosList">
+            <div class="no-eventos">Selecione um dia para ver os eventos</div>
+          </div>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="newsletter-card">
+          <h3>Fique por dentro de tudo</h3>
+          <p>Receba novidades, artigos e programações da HD360 direto no seu email.</p>
+          <div class="newsletter-form">
+            <input type="text" class="newsletter-input" placeholder="Seu nome">
+            <input type="email" class="newsletter-input" placeholder="Seu email">
+            <button class="newsletter-btn" onclick="assinarNewsletter()">Quero receber novidades</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">HD360</div>
+    <div class="footer-links">
+      <a href="index.html">← Site principal</a>
+      <a href="casa-aba.html">Casa ABA</a>
+      <a href="https://wa.me/555121128884">WhatsApp</a>
+    </div>
+    <div class="footer-bottom">© 2025 HD360 · Todos os direitos reservados · Porto Alegre, RS</div>
+  </footer>
+
+  <a href="https://wa.me/555121128884" class="whatsapp-float" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Eventos do calendário
+    const eventos = {
+      '2025-04-20': [{ titulo: 'Dia do Piquenique HD360', horario: 'Das 9h às 12h', cor: '#8db84a' }],
+      '2025-04-28': [{ titulo: 'Dia da Música', horario: 'Das 14h às 16h', cor: '#8b6fbe' }],
+      '2025-05-15': [{ titulo: 'Copa do Mundo HD360', horario: 'Das 8h às 12h', cor: '#4a85b8' }],
+      '2025-05-20': [{ titulo: 'Palestra: Orientação Parental', horario: 'Das 19h às 21h', cor: '#8db84a' }],
+      '2025-06-10': [{ titulo: 'Festa Junina HD360', horario: 'Das 15h às 18h', cor: '#ba7517' }],
+    };
+
+    let calYear = new Date().getFullYear();
+    let calMonth = new Date().getMonth();
+    let selectedDay = null;
+
+    const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+    function renderCal() {
+      document.getElementById('calMonth').textContent = meses[calMonth] + ' ' + calYear;
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      const daysInPrev = new Date(calYear, calMonth, 0).getDate();
+      const today = new Date();
+      let html = '';
+      for (let i = firstDay - 1; i >= 0; i--) {
+        html += '<div class="cal-day other-month">' + (daysInPrev - i) + '</div>';
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = calYear + '-' + String(calMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+        const isToday = today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d;
+        const hasEvent = eventos[dateStr] ? 'has-event' : '';
+        const isSel = selectedDay === dateStr ? 'selected' : '';
+        const isT = isToday ? 'today' : '';
+        html += '<div class="cal-day ' + isT + ' ' + hasEvent + ' ' + isSel + '" onclick="selectDay(\'' + dateStr + '\', ' + d + ')">' + d + '</div>';
+      }
+      const remaining = 42 - (firstDay + daysInMonth);
+      for (let d = 1; d <= remaining; d++) {
+        html += '<div class="cal-day other-month">' + d + '</div>';
+      }
+      document.getElementById('calDays').innerHTML = html;
+    }
+
+    function selectDay(dateStr, day) {
+      selectedDay = dateStr;
+      renderCal();
+      const evts = eventos[dateStr];
+      const el = document.getElementById('eventosList');
+      if (!evts || evts.length === 0) {
+        el.innerHTML = '<div class="no-eventos">Nenhum evento neste dia</div>';
+        return;
+      }
+      el.innerHTML = evts.map(e => `
+        <div class="evento-item">
+          <div class="evento-dot" style="background:${e.cor}"></div>
+          <div class="evento-info">
+            <h4>${e.titulo}</h4>
+            <span>${e.horario}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function calNav(dir) {
+      calMonth += dir;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      if (calMonth < 0)  { calMonth = 11; calYear--; }
+      renderCal();
+    }
+
+    renderCal();
+
+    // Filtros
+    function filtrar(cat, btn) {
+      document.querySelectorAll('.filtro-btn').forEach(b => {
+        b.classList.remove('active', 'active-programacoes', 'active-novidades');
+      });
+      if (cat === 'programacoes') btn.classList.add('active-programacoes');
+      else if (cat === 'novidades') btn.classList.add('active-novidades');
+      else btn.classList.add('active');
+
+      document.querySelectorAll('.post-card').forEach(card => {
+        if (cat === 'todos' || card.dataset.cat === cat) card.classList.remove('hidden');
+        else card.classList.add('hidden');
+      });
+    }
+
+    // Newsletter
+    function assinarNewsletter() {
+      alert('Obrigado! Em breve você receberá nossas novidades.');
+    }
+
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+    });
+  </script>
+</body>
+</html>

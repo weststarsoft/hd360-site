@@ -1012,10 +1012,66 @@
     .convenio-nome { font-size: 16px; font-weight: 800; color: var(--gray-3); letter-spacing: -0.02em; transition: color 0.2s; }
     .convenio-item:hover .convenio-nome { color: var(--ocean-text); }
 
+    /* BANNER BLOG */
+    #blog-banner {
+      background: linear-gradient(135deg, #1a4a6e 0%, #2d5a8e 50%, #5c3d8f 100%);
+      padding: 56px 5%; position: relative; overflow: hidden;
+    }
+    #blog-banner::before {
+      content: ''; position: absolute; width: 400px; height: 400px;
+      border-radius: 50%; background: rgba(255,255,255,0.04);
+      top: -150px; right: -80px;
+    }
+    .blog-banner-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .blog-banner-tag {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+      background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .blog-banner-title {
+      font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 3vw, 34px);
+      font-weight: 300; color: white; line-height: 1.2; margin-bottom: 14px;
+    }
+    .blog-banner-title em { font-style: italic; color: #b8d8f0; }
+    .blog-banner-sub { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 28px; }
+    .blog-banner-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: white; color: #1a4a6e; font-weight: 700; font-size: 14px;
+      padding: 12px 22px; border-radius: 10px; text-decoration: none; transition: all 0.2s;
+    }
+    .blog-banner-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .blog-banner-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+    .blog-mini-card {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 16px 18px;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .blog-mini-card:hover { background: rgba(255,255,255,0.14); }
+    .blog-mini-cat {
+      display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px;
+      border-radius: 10px; margin-bottom: 8px;
+    }
+    .cat-conteudo { background: #ddeef8; color: #1a4a6e; }
+    .cat-programacoes { background: #d8edbc; color: #2d4a10; }
+    .cat-novidades { background: #ddd5f0; color: #2a1654; }
+    .blog-mini-card p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; font-weight: 600; }
+    .blog-banner-link {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+      transition: color 0.2s;
+    }
+    .blog-banner-link:hover { color: white; }
+
     /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 900px) {
+      .blog-banner-inner { grid-template-columns: 1fr; gap: 28px; }
       .nav-links, .nav-actions { display: none; }
       .nav-toggle { display: flex; }
       .footer-top { grid-template-columns: 1fr 1fr; }
@@ -1219,6 +1275,33 @@
           <h3>Psicopedagogia</h3>
           <p>Intervenção nas dificuldades de aprendizagem, com foco na inclusão educacional e autonomia.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       BANNER BLOG
+  ============================= -->
+  <section id="blog-banner">
+    <div class="blog-banner-inner">
+      <div class="blog-banner-left">
+        <span class="blog-banner-tag">✨ Novidade</span>
+        <h2 class="blog-banner-title">Dia do Piquenique HD360 — <em>venha celebrar com a gente!</em></h2>
+        <p class="blog-banner-sub">Um dia especial ao ar livre para crianças, famílias e toda a equipe. Atividades lúdicas, música e muito carinho.</p>
+        <a href="blog.html" class="blog-banner-btn">Ver todas as novidades →</a>
+      </div>
+      <div class="blog-banner-right">
+        <div class="blog-banner-cards">
+          <div class="blog-mini-card">
+            <span class="blog-mini-cat cat-conteudo">📰 Conteúdo</span>
+            <p>Perguntas frequentes sobre autismo — dúvidas mais buscadas pelas famílias</p>
+          </div>
+          <div class="blog-mini-card">
+            <span class="blog-mini-cat cat-programacoes">📅 Programação</span>
+            <p>Dia da Música — apresentação especial das turmas de musicoterapia</p>
+          </div>
+        </div>
+        <a href="blog.html" class="blog-banner-link">Ver blog completo →</a>
       </div>
     </div>
   </section>
@@ -1666,7 +1749,7 @@
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
-        <a href="https://wa.me/5551900000000">WhatsApp</a>
+        <a href="https://wa.me/555121128884">WhatsApp</a>
         <a href="/cdn-cgi/l/email-protection#e685898892879289a68e82d5d0d6c885898bc88494"><span class="__cf_email__" data-cfemail="c5a6aaabb1a4b1aa85ada1f6f3f5eba6aaa8eba7b7">[email&#160;protected]</span></a>
         <a href="#">Instagram</a>
         <a href="#">Facebook</a>
@@ -1682,7 +1765,7 @@
   </footer>
 
   <!-- WhatsApp Flutuante -->
-  <a href="https://wa.me/5551900000000" class="whatsapp-float" target="_blank" title="Fale no WhatsApp">
+  <a href="https://wa.me/555121128884" class="whatsapp-float" target="_blank" title="Fale no WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 

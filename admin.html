@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HD360 Admin — Painel de Publicações</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: #f4f3ef; color: #2d2d2d; min-height: 100vh; }
+    :root {
+      --ocean-deep: #4a85b8; --ocean-text: #1a4a6e;
+      --safari-mid: #8db84a; --safari-deep: #5a7a2e;
+      --gray-1: #f4f3ef; --gray-2: #e8e6e0; --gray-3: #b0ada4; --gray-4: #6b6860;
+      --dark: #1e1e1e; --white: #ffffff;
+      --danger: #e24b4a; --success: #639922;
+    }
+
+    /* LOGIN */
+    #loginScreen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1a4a6e 0%, #2d5a8e 50%, #5c3d8f 100%);
+    }
+    .login-card {
+      background: white; border-radius: 20px; padding: 48px 40px;
+      width: 100%; max-width: 400px; text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .login-logo { width: 80px; height: 80px; background: linear-gradient(135deg, #7aafd4, #8b6fbe); border-radius: 20px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .login-card h1 { font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+    .login-card p { font-size: 14px; color: var(--gray-4); margin-bottom: 32px; }
+    .login-input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--gray-2); border-radius: 10px; font-size: 15px; font-family: 'Nunito', sans-serif; margin-bottom: 12px; transition: border-color 0.2s; }
+    .login-input:focus { outline: none; border-color: var(--ocean-deep); }
+    .login-btn { width: 100%; padding: 14px; border: none; border-radius: 10px; background: var(--ocean-deep); color: white; font-size: 15px; font-weight: 700; font-family: 'Nunito', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .login-btn:hover { background: var(--ocean-text); }
+    .login-error { color: var(--danger); font-size: 13px; margin-top: 8px; display: none; }
+
+    /* ADMIN */
+    #adminScreen { display: none; }
+    .admin-nav {
+      background: white; border-bottom: 1px solid var(--gray-2);
+      padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-nav-logo { display: flex; align-items: center; gap: 10px; }
+    .admin-nav-logo img { height: 38px; }
+    .admin-badge { font-size: 11px; font-weight: 700; background: #fff3cd; color: #856404; padding: 3px 10px; border-radius: 20px; }
+    .admin-nav-actions { display: flex; gap: 10px; align-items: center; }
+    .btn-logout { font-size: 13px; font-weight: 700; color: var(--gray-4); background: var(--gray-1); border: 1.5px solid var(--gray-2); padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .btn-logout:hover { color: var(--danger); border-color: var(--danger); }
+    .btn-view-blog { font-size: 13px; font-weight: 700; color: white; background: var(--ocean-deep); border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; text-decoration: none; }
+
+    .admin-body { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+    .admin-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
+
+    /* FORM */
+    .form-card { background: white; border-radius: 16px; padding: 32px; border: 1px solid var(--gray-2); }
+    .form-card h2 { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 12px; font-weight: 700; color: var(--gray-4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-2); border-radius: 10px; font-size: 14px; font-family: 'Nunito', sans-serif; color: var(--dark); transition: border-color 0.2s; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--ocean-deep); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .img-upload-area {
+      border: 2px dashed var(--gray-2); border-radius: 10px; padding: 24px;
+      text-align: center; cursor: pointer; transition: all 0.2s; background: var(--gray-1);
+    }
+    .img-upload-area:hover { border-color: var(--ocean-mid, #7aafd4); background: #ddeef8; }
+    .img-upload-area input { display: none; }
+    .img-upload-icon { font-size: 32px; margin-bottom: 8px; }
+    .img-upload-text { font-size: 13px; color: var(--gray-4); }
+    .img-preview { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-top: 12px; display: none; }
+    .btn-publish { width: 100%; padding: 14px; border: none; border-radius: 10px; background: var(--safari-deep); color: white; font-size: 15px; font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
+    .btn-publish:hover { background: #2d4a10; transform: translateY(-1px); }
+    .publish-success { display: none; background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 14px; border-radius: 10px; margin-top: 12px; font-size: 14px; font-weight: 700; text-align: center; }
+
+    /* POSTS LIST */
+    .posts-card { background: white; border-radius: 16px; border: 1px solid var(--gray-2); overflow: hidden; }
+    .posts-card-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-2); display: flex; align-items: center; justify-content: space-between; }
+    .posts-card-header h3 { font-size: 16px; font-weight: 800; color: var(--dark); }
+    .posts-count { font-size: 12px; font-weight: 700; background: var(--gray-1); color: var(--gray-4); padding: 3px 10px; border-radius: 20px; }
+    .posts-list { max-height: 600px; overflow-y: auto; }
+    .post-item { padding: 16px 24px; border-bottom: 1px solid var(--gray-1); display: flex; gap: 12px; align-items: flex-start; }
+    .post-item:last-child { border-bottom: none; }
+    .post-item-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: var(--gray-1); display: flex; align-items: center; justify-content: center; font-size: 20px; overflow: hidden; }
+    .post-item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .post-item-info { flex: 1; min-width: 0; }
+    .post-item-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .post-item-meta { font-size: 11px; color: var(--gray-3); display: flex; gap: 8px; align-items: center; }
+    .post-item-cat { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+    .cat-conteudo { background: #ddeef8; color: #1a4a6e; }
+    .cat-programacoes { background: #d8edbc; color: #2d4a10; }
+    .cat-novidades { background: #ddd5f0; color: #2a1654; }
+    .btn-delete { background: none; border: none; cursor: pointer; color: var(--gray-3); font-size: 16px; padding: 4px; transition: color 0.2s; flex-shrink: 0; }
+    .btn-delete:hover { color: var(--danger); }
+    .empty-posts { padding: 40px 24px; text-align: center; color: var(--gray-3); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <div class="login-logo">🏥</div>
+      <h1>HD360 Admin</h1>
+      <p>Painel de publicações do blog</p>
+      <input type="text" class="login-input" id="loginUser" placeholder="Usuário" />
+      <input type="password" class="login-input" id="loginPass" placeholder="Senha" onkeydown="if(event.key==='Enter') fazerLogin()" />
+      <button class="login-btn" onclick="fazerLogin()">Entrar</button>
+      <div class="login-error" id="loginError">Usuário ou senha incorretos</div>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="adminScreen">
+    <nav class="admin-nav">
+      <div class="admin-nav-logo">
+        <img src="assets/images/logo-hd360.png" alt="HD360" onerror="this.style.display='none'">
+        <span class="admin-badge">Painel Admin</span>
+      </div>
+      <div class="admin-nav-actions">
+        <a href="blog.html" target="_blank" class="btn-view-blog">Ver Blog →</a>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </div>
+    </nav>
+
+    <div class="admin-body">
+      <div class="admin-grid">
+
+        <!-- FORMULÁRIO -->
+        <div class="form-card">
+          <h2>✏️ Nova publicação</h2>
+
+          <div class="form-group">
+            <label class="form-label">Título da publicação *</label>
+            <input type="text" class="form-input" id="postTitulo" placeholder="Ex: Dia do Piquenique HD360">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Categoria *</label>
+              <select class="form-select" id="postCategoria">
+                <option value="conteudo">📰 Conteúdo</option>
+                <option value="programacoes">📅 Programações</option>
+                <option value="novidades">✨ Novidades</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Data *</label>
+              <input type="date" class="form-input" id="postData">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Resumo (aparece nos cards) *</label>
+            <textarea class="form-textarea" id="postResumo" placeholder="Escreva um resumo curto da publicação..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Conteúdo completo</label>
+            <textarea class="form-textarea" id="postConteudo" style="min-height:180px" placeholder="Escreva o conteúdo completo aqui..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Imagem de capa</label>
+            <div class="img-upload-area" onclick="document.getElementById('imgInput').click()">
+              <input type="file" id="imgInput" accept="image/*" onchange="previewImg(this)">
+              <div class="img-upload-icon">🖼️</div>
+              <div class="img-upload-text">Clique para selecionar uma imagem<br><small>JPG, PNG ou WebP</small></div>
+            </div>
+            <img id="imgPreview" class="img-preview" alt="Preview">
+          </div>
+
+          <button class="btn-publish" onclick="publicar()">🚀 Publicar no blog</button>
+          <div class="publish-success" id="publishSuccess">✅ Publicação salva com sucesso!</div>
+        </div>
+
+        <!-- LISTA DE POSTS -->
+        <div>
+          <div class="posts-card">
+            <div class="posts-card-header">
+              <h3>Publicações</h3>
+              <span class="posts-count" id="postsCount">0 posts</span>
+            </div>
+            <div class="posts-list" id="adminPostsList">
+              <div class="empty-posts">Nenhuma publicação ainda.<br>Crie a primeira acima!</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CREDENCIAIS — altere aqui para mudar usuário e senha
+    const USERS = {
+      'admin': 'hd360@2025',
+      'equipe': 'hd360equipe'
+    };
+
+    function fazerLogin() {
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value;
+      if (USERS[user] && USERS[user] === pass) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminScreen').style.display = 'block';
+        document.getElementById('postData').value = new Date().toISOString().split('T')[0];
+        renderAdminPosts();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    function logout() {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminScreen').style.display = 'none';
+      document.getElementById('loginUser').value = '';
+      document.getElementById('loginPass').value = '';
+    }
+
+    function previewImg(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.getElementById('imgPreview');
+        img.src = e.target.result;
+        img.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function getPosts() {
+      try { return JSON.parse(localStorage.getItem('hd360_posts') || '[]'); } catch { return []; }
+    }
+    function savePosts(posts) {
+      localStorage.setItem('hd360_posts', JSON.stringify(posts));
+    }
+
+    function publicar() {
+      const titulo = document.getElementById('postTitulo').value.trim();
+      const categoria = document.getElementById('postCategoria').value;
+      const data = document.getElementById('postData').value;
+      const resumo = document.getElementById('postResumo').value.trim();
+      const conteudo = document.getElementById('postConteudo').value.trim();
+      const imgSrc = document.getElementById('imgPreview').src;
+
+      if (!titulo || !resumo || !data) {
+        alert('Preencha título, resumo e data para publicar.');
+        return;
+      }
+
+      const post = {
+        id: Date.now(),
+        titulo, categoria, data, resumo, conteudo,
+        imagem: imgSrc && imgSrc.startsWith('data:') ? imgSrc : '',
+        createdAt: new Date().toISOString()
+      };
+
+      const posts = getPosts();
+      posts.unshift(post);
+      savePosts(posts);
+
+      // Limpar form
+      document.getElementById('postTitulo').value = '';
+      document.getElementById('postResumo').value = '';
+      document.getElementById('postConteudo').value = '';
+      document.getElementById('imgPreview').style.display = 'none';
+      document.getElementById('postData').value = new Date().toISOString().split('T')[0];
+
+      const success = document.getElementById('publishSuccess');
+      success.style.display = 'block';
+      setTimeout(() => success.style.display = 'none', 3000);
+
+      renderAdminPosts();
+    }
+
+    function deletarPost(id) {
+      if (!confirm('Deseja excluir esta publicação?')) return;
+      const posts = getPosts().filter(p => p.id !== id);
+      savePosts(posts);
+      renderAdminPosts();
+    }
+
+    function renderAdminPosts() {
+      const posts = getPosts();
+      const container = document.getElementById('adminPostsList');
+      const count = document.getElementById('postsCount');
+      count.textContent = posts.length + (posts.length === 1 ? ' post' : ' posts');
+      if (posts.length === 0) {
+        container.innerHTML = '<div class="empty-posts">Nenhuma publicação ainda.<br>Crie a primeira acima!</div>';
+        return;
+      }
+      const cats = { conteudo: '📰', programacoes: '📅', novidades: '✨' };
+      const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+      container.innerHTML = posts.map(p => {
+        const d = new Date(p.data + 'T12:00:00');
+        const dataFmt = d.getDate() + ' ' + meses[d.getMonth()] + ' ' + d.getFullYear();
+        return `
+          <div class="post-item">
+            <div class="post-item-img">
+              ${p.imagem ? '<img src="' + p.imagem + '" alt="">' : cats[p.categoria]}
+            </div>
+            <div class="post-item-info">
+              <div class="post-item-title">${p.titulo}</div>
+              <div class="post-item-meta">
+                <span class="post-item-cat cat-${p.categoria}">${p.categoria}</span>
+                <span>${dataFmt}</span>
+              </div>
+            </div>
+            <button class="btn-delete" onclick="deletarPost(${p.id})" title="Excluir">✕</button>
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
