@@ -1002,6 +1002,16 @@
     .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
     .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
 
+
+    /* CONVÊNIOS */
+    #convenios { background: white; border-top: 1px solid var(--gray-2); border-bottom: 1px solid var(--gray-2); padding: 28px 0; overflow: hidden; }
+    .convenios-label { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 20px; }
+    .convenios-track-wrap { overflow: hidden; }
+    .convenios-track { display: flex; gap: 0; will-change: transform; }
+    .convenio-item { flex: 0 0 auto; padding: 14px 44px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--gray-2); }
+    .convenio-nome { font-size: 16px; font-weight: 800; color: var(--gray-3); letter-spacing: -0.02em; transition: color 0.2s; }
+    .convenio-item:hover .convenio-nome { color: var(--ocean-text); }
+
     /* ============================================================
        RESPONSIVE
     ============================================================ */
@@ -1129,6 +1139,29 @@
       </div>
     </div>
 
+  </section>
+
+  <!-- ============================
+       CONVÊNIOS E PARCEIROS
+  ============================= -->
+  <section id="convenios">
+    <div class="convenios-label">Atendemos pelos principais convênios</div>
+    <div class="convenios-track-wrap">
+      <div class="convenios-track" id="conveniosTrack">
+        <div class="convenio-item"><span class="convenio-nome">Unimed</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Bradesco Saúde</span></div>
+        <div class="convenio-item"><span class="convenio-nome">SulAmérica</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Amil</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Porto Seguro</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Care Plus</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Omint</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Mediservice</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Alice</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Vivest</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Fusex</span></div>
+        <div class="convenio-item"><span class="convenio-nome">Cassi</span></div>
+      </div>
+    </div>
   </section>
 
   <!-- ============================
@@ -1765,6 +1798,27 @@
     }
 
     // --- Tabs dos andares ---
+    // --- Convênios scroll infinito ---
+    (function() {
+      const track = document.getElementById('conveniosTrack');
+      if (!track) return;
+      const originals = Array.from(track.children);
+      originals.forEach(c => track.appendChild(c.cloneNode(true)));
+      originals.forEach(c => track.appendChild(c.cloneNode(true)));
+      let offset = 0;
+      const SPEED = 0.4;
+      function itemW() { return track.children[0].offsetWidth; }
+      function total() { return itemW() * originals.length; }
+      function loop() {
+        offset += SPEED;
+        if (offset >= total()) offset -= total();
+        track.style.transform = 'translateX(-' + offset + 'px)';
+        requestAnimationFrame(loop);
+      }
+      track.style.transition = 'none';
+      requestAnimationFrame(loop);
+    })();
+
     function showAndar(theme, btn) {
       document.querySelectorAll('.andar-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.andar-tab').forEach(b => {
